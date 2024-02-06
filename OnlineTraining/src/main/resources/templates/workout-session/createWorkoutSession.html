@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Workout Session</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/register')}"></div>
+<main class="align">
+    <div class="login">
+        <br>
+        <br>
+        <header class="login__header">
+            <h2 class="align">Create Workout Session</h2>
+        </header>
+<form th:action="@{/workoutSession/create}" th:object="${workoutSessionInputDTO}" method="post" class="login__form">
+
+    <input type="hidden" th:field="*{workoutId}">
+
+    <label for="exercise">Exercise :</label>
+    <select th:field="*{exerciseId}" id="exercise" required>
+        <option value="" disabled>Select Exercise</option>
+        <option th:each="exercise : ${listExercises}"
+                th:value="${exercise.id}"
+                th:text="${exercise.name}"> <!-- Set selected option -->
+        </option>
+    </select>
+
+    <label for="reps">Number of Reps:</label>
+    <input type="number" id="reps" th:field="*{numberOfReps}" placeholder="Enter number of reps" required min="1"/>
+
+    <label for="pause" >Pause After Exercise (in Seconds):</label>
+    <input type="number" id="pause" th:field="*{pauseAfterExerciseInSeconds}" placeholder="Enter pause after exercise" required min="5"/>
+
+    <label for="weight" >Weight:</label>
+    <input type="number" id="weight" th:field="*{weight}" placeholder="Enter weight" required/>
+
+    <div>
+        <input class="button" type="submit" value="Create">
+    </div>
+</form>
+    </div>
+</main>
+</body>
+</html>

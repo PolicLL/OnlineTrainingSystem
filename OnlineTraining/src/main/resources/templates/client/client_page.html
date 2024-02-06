@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client page</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/select.css}">
+    <link rel="stylesheet" th:href="@{/css/hand.css}">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/clients/client-page')}"></div>
+<br>
+<br>
+<br>
+<br>
+<div>
+    <div class="select">
+    <select id="educationFilter">
+        <option selected disabled>Select education</option>
+        <option value="">Any</option>
+        <option value="CERTIFIED_PERSONAL_TRAINER">Certified personal trainer</option>
+        <option value="HIGH_SCHOOL">High school</option>
+        <option value="BACHELORS">Bachelors</option>
+        <option value="MASTERS">Masters</option>
+        <option value="PHD">PHD</option>
+    </select>
+    </div>
+
+    <div class="select">
+    <select id="experienceFilter" class="format">
+        <option selected disabled>Select experience</option>
+        <option value="">Any</option>
+        <option value="2">2+ years</option>
+        <option value="5">5+ years</option>
+        <option value="7">7+ years</option>
+        <option value="10">10+ years</option>
+    </select>
+    </div>
+
+    <div class="select">
+    <select id="monthlyPriceFilter">
+        <option selected disabled>Select a monthly price</option>
+        <option value="">Any</option>
+        <option value="1000.0"><1000 €</option>
+        <option value="1200.0"><1200 €</option>
+        <option value="1500.0"><1500 €</option>
+        <option value="1800.0"><1800 €</option>
+        <option value="2000.0"><2000 €</option>
+        <option value="2500.0"><2500 €</option>
+        <option value="3000.0"><3000 €</option>
+    </select>
+    </div>
+
+    <div class="select">
+    <select id="ageFilter">
+        <option selected disabled>Select age</option>
+        <option value="">Any</option>
+        <option value="20">20+ years</option>
+        <option value="25">35+ years</option>
+        <option value="30">30+ years</option>
+        <option value="35">35+ years</option>
+        <option value="40">40+ years</option>
+        <option value="45">45+ years</option>
+        <option value="50">50+ years</option>
+    </select>
+    </div>
+
+    <div class="select" >
+    <select id="genderFilter">
+        <option selected disabled>Select gender</option>
+        <option value="">All</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+     </div>
+    <br>
+    <button type="button" onclick="filterCoaches()" class="become-link">Apply Filters</button>
+    <br>
+</div>
+<br>
+<div style="overflow-x: auto;">
+    <div th:replace="~{fragments/coach_table :: coach_table}"></div>
+</div>
+
+<p th:unless="${coaches}">No coaches available.</p>
+
+<div class="pagination-container">
+    <ol class="pagination-list">
+        <li th:unless="${currentPage == 1}" class="pagination-item">
+            <a th:href="@{/clients/client-page(page=1)}" class="pagination-link">First</a>
+        </li>
+        <li th:unless="${currentPage == 1}" class="pagination-item">
+            <a th:href="@{/clients/client-page(page=${currentPage != null ? currentPage - 1 : 1})}" class="pagination-link">Previous</a>
+        </li>
+
+        <!-- Dynamic sequence based on current page -->
+        <li th:each="pageNum : ${totalPages != null ? #numbers.sequence((currentPage != null && currentPage - 1 > 0) ? currentPage - 1 : 1,
+                                                               (currentPage != null && currentPage + 1 < totalPages) ? currentPage + 1 : totalPages) : {}}">
+            <a th:href="@{/clients/client-page(page=${pageNum})}" th:text="${pageNum}" style="color:gray;"
+               class="pagination-link" th:class="${pageNum == currentPage} ? 'active'"></a>
+        </li>
+
+        <li th:unless="${currentPage == totalPages}" class="pagination-item">
+            <a th:href="@{/clients/client-page(page=${currentPage != null ? currentPage + 1 : 1})}" class="pagination-link">Next</a>
+        </li>
+        <li th:unless="${currentPage == totalPages}" class="pagination-item">
+            <a th:href="@{/clients/client-page(page=${totalPages})}" class="pagination-link">Last</a>
+        </li>
+    </ol>
+</div>
+
+
+<script th:src="@{/js/filterCoaches.js}"></script>
+</body>
+</html>

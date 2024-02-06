@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Measurement</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+
+<div th:replace="fragments/navigation :: navigation('/measurements')"></div>
+<br>
+<br>
+
+<main class="align">
+    <div class="login">
+        <header class="login__header">
+            <h2 class="align">Update Measurement</h2>
+        </header>
+
+
+        <form th:action="@{'/measurements/personal/' + ${contractId} + '/update/' + ${measurementId}}"
+              th:method="post"
+              th:object="${measurementDto}"
+              method="post" class="login__form">
+            <input type="hidden" name="_method" value="put" />
+
+            <label for="measurementDate">Measurement Date:</label>
+            <input type="text" id="measurementDate" name="measurementDate" th:value="${measurementDto.measurementDate}" readonly />
+
+            <label for="bodyWeight">Body Weight:</label>
+            <input type="number" id="bodyWeight" step="0.1" name="bodyWeight" required min="1" th:value="${measurementDto.bodyWeight}"  />
+
+            <div>
+                <label for="bodyFat">Body Fat:</label>
+                <input type="number" id="bodyFat" step="0.1" name="bodyFat" required min="1" th:value="${measurementDto.bodyFat}"  />
+            </div>
+            <div>
+
+                <label for="waistCircumference">Waist Circumference:</label>
+                <input type="number" id="waistCircumference" step="0.1" name="waistCircumference" required min="10" th:value="${measurementDto.waistCircumference}" />
+            </div>
+            <div>
+                <label for="chestCircumference">Chest Circumference:</label>
+                <input type="number" id="chestCircumference" step="0.1" name="chestCircumference" required min="10" th:value="${measurementDto.chestCircumference}"  />
+            </div>
+            <div>
+                <label for="armCircumference">Arm Circumference:</label>
+                <input type="number" id="armCircumference" step="0.1" name="armCircumference" required min="10" th:value="${measurementDto.armCircumference}" />
+            </div>
+            <div>
+                <label for="legCircumference">Leg Circumference:</label>
+                <input type="number" id="legCircumference" step="0.1" name="legCircumference" required min="10" th:value="${measurementDto.legCircumference}" />
+            </div>
+
+            <input class="button" type="submit" value="Update">
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

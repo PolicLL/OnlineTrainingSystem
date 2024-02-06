@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Settings</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/clients/settings')}"></div>
+<main class="align">
+    <div class="login">
+        <br>
+        <br>
+        <header class="login__header">
+            <h2 class="align">Update Your Information</h2>
+        </header>
+
+        <form th:action="@{/clients/update}" class="login__form" method="post" th:object="${client}">
+
+            <input type="hidden" name="_method" value="put" />
+
+            <label for="medicalCondition">Medical condition: </label>
+            <textarea id="medicalCondition" th:field="*{medicalCondition}" rows="4" style="font-family: 'Varela Round'; font-size: 1.1rem;"></textarea>
+
+            <label for="injuries">Injuries: </label>
+            <textarea id="injuries" th:field="*{injuries}" rows="4" style="font-family: 'Varela Round'; font-size: 1.1rem;"></textarea>
+
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" th:value="${client.user.firstName}" name="firstName" required >
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" th:value="${client.user.lastName}" name="lastName" required >
+
+            <label for="street">Street:</label>
+            <input type="text" id="street" th:value="${client.user.street}" name="street" required >
+
+            <label for="city">City:</label>
+            <input type="text" id="city" th:value="${client.user.city}" name="city" required >
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" th:value="${client.user.country}" name="country" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" th:value="${client.user.phoneNumber}" name="phoneNumber" required >
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option th:each="option : ${genderOptions}"
+                        th:value="${option}"
+                        th:text="${option}"
+                        th:selected="${client.user.gender == option}"></option>
+            </select>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" th:value="${client.user.age}" name="age" required min="1" max="119">
+
+            <div>
+                <input class="button" type="submit" value="Update">
+            </div>
+            <div th:if="${error}" class="error" style="color: red;">
+                <p th:text="${error}"></p>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

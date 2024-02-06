@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/passwordValidation.css}">
+
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/register')}"></div>
+<main class="align">
+<div class="login">
+    <br>
+    <br>
+    <header class="login__header">
+        <h2 class="align">Registration Form</h2>
+    </header>
+
+    <form action="/register" class="login__form" method="POST" th:object="${registerRequest}">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" th:value="${registerRequest.firstName}" required placeholder="Enter your first name">
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" th:value="${registerRequest.lastName}" required placeholder="Enter your last name">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:value="${registerRequest.email}" required placeholder="Enter your email">
+
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street" th:value="${registerRequest.street}" required placeholder="Enter your street">
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" th:value="${registerRequest.city}" required placeholder="Enter your city">
+
+        <label for="country">Country:</label>
+        <select id="country" name="country" required>
+            <option th:each="c : ${T(com.training.OnlineTraining.model.enums.Country).values()}"
+                    th:value="${c}" th:text="${c.country}" th:selected="${registerRequest.country == c}">
+            </option>
+        </select>
+
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" th:value="${registerRequest.phoneNumber}" required placeholder="Enter your phone number">
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Male" th:selected="${registerRequest.gender == 'Male'}">Male</option>
+            <option value="Female" th:selected="${registerRequest.gender == 'Female'}">Female</option>
+        </select>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" th:value="${registerRequest.age}" required min="1" placeholder="Enter your age">
+
+        <label for="password">Password:</label>
+        <div class="password-container">
+            <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                   required placeholder="Enter your password">
+            <div class="eye-icon" id="showPassword" onclick="togglePasswordVisibility()"></div>
+        </div>
+
+
+        <div id="message">
+            <h3>Password must contain the following:</h3>
+            <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+            <p id="capital" class="invalid">An <b>uppercase</b> letter</p>
+            <p id="number" class="invalid">A <b>number</b></p>
+            <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+        </div>
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <div class="password-container">
+        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password"
+               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+            <div class="eye-icon" id="showConfirmPassword" onclick="toggleConfirmPasswordVisibility()"></div>
+        </div>
+
+        <div th:if="${error}" class="error" style="color: red;">
+            <p th:text="${error}"></p>
+        </div>
+        <div>
+            <input class="button" type="submit" value="Register">
+        </div>
+
+    </form>
+</div>
+
+
+</main>
+<script th:src="@{/js/passwordValidation.js}"></script>
+
+</body>
+</html>

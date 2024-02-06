@@ -1,0 +1,8 @@
+-- Inserting workout sessions for workouts with random UUIDs
+INSERT INTO workout_session (id, workout_id, exercise_id, number_of_reps, pause_after_exercise_in_seconds, weight)
+VALUES
+('5fa6f5b0-60c2-4ae0-9ba7-88c6b6b8a964', '5d023fe0-f953-46b1-8e3d-9183aae9d4a4', '11111111-1111-1111-1111-111111111111', 12, 60, 50.00),
+('53de2f11-1d5c-4de6-a70e-0b3f1b68cbf1', 'b899b5fe-2a26-49e0-8320-d5de5219c2c9', '22222222-2222-2222-2222-222222222222', 10, 45, 70.00),
+('e7d8fe4e-70a0-4c8f-ba8b-5b2ba994748d', 'f052bd01-6d4b-4535-8b90-68e1b2221f78', '33333333-3333-3333-3333-333333333333', 8, 60, 60.00),
+('e4abdc0b-9fa7-4f11-93f8-6013c6711f25', '2d0a3f9c-0d36-4d26-a4fc-0d1f36a7f9ae', '44444444-4444-4444-4444-444444444444', 15, 30, 40.00),
+('c7c7a028-6db5-4a06-87e6-4b119b9f3689', 'bc4e71b6-9639-4d0b-982f-7a3c2d9e9c8b', '55555555-5555-5555-5555-555555555555', 20, 75, 80.00);

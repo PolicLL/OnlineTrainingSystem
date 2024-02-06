@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Report</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>Client's Date of Workout</th>
+        <th>Ordinal Number of Workout</th>
+        <th>Number of Exercises</th>
+        <th>Warming Up Time (in seconds)</th>
+        <th>Number of Sets</th>
+        <th>Pause Between Sets (in seconds)</th>
+        <th>Duration of the Workout</th>
+        <th>Client's Self Rating</th>
+        <th>Next Workout</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${workout.dateOfWorkout}"></td>
+        <td th:text="${workout.ordinalNumberOfWorkout}"></td>
+        <td th:text="${workout.numberOfExercises}"></td>
+        <td th:text="${workout.warmingUpTimeInSeconds}"></td>
+        <td th:text="${workout.numberOfSets}"></td>
+        <td th:text="${workout.pauseBetweenSetsInSeconds}"></td>
+        <td th:text="${workout.getDuration}"></td>
+        <td th:text="${workout.selfRating}"></td>
+        <td th:text="${workout.nextWorkout}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

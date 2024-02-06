@@ -1,0 +1,20 @@
+INSERT INTO Coach (id, user_id, years_of_experience, education, monthly_price)
+VALUES
+('c5f8d1a0-17e9-48a7-910c-ec4c1f7a11e3', '7d3e4c58-2c5f-4fe1-9a08-1b5b6c7d8e9f', 5, 'CERTIFIED_PERSONAL_TRAINER', 1200.00),
+('f831f8e9-4e48-4e1b-a4bf-759ab67826d9', '8b0a1f22-685f-4a63-8c47-20c2a74392f1', 8, 'CERTIFIED_PERSONAL_TRAINER', 2500.00),
+('c5b83767-2a01-4c58-bb9e-f53e0727f440', '9e6b5487-3e5b-4912-aa01-6b56f64cb66f', 10, 'BACHELORS', 1800.00),
+('c212aaf9-1614-492d-8f4b-e1c46db0519f', 'a1c3e9b4-17d7-44da-96f2-25e21f7a781b', 6, 'BACHELORS', 1000.00),
+('f0c17762-b2d7-47c3-bc88-eb2b23a0d2b5', 'b4f2c5e8-9f6d-4f1c-b201-6e4b3a85b1c9', 12, 'MASTERS', 2800.00),
+('f2e3a17a-b2b4-4f17-bb7c-61dc4e927c84', 'bd8b0e4f-8a41-4e7d-ba67-0b6936c2b3d1', 12, 'PHD', 1800.00),
+('4d28e5e5-83a0-4e7f-8e7c-95f3e55cf29a', 'c917f8e2-69e1-45b3-bb3e-342e33519914', 12, 'PHD', 2800.00),
+('7c8a9df9-6351-4b3f-bc29-ee35f2e1a2b2', 'd65f25d3-9c0d-4d7b-88d1-0b731cc4e1f0', 12, 'PHD', 2800.00),
+('5d6b91a7-889c-43af-8a19-3a7eb2d5c0f0', 'e20bd8a1-07e4-4ad2-9104-685c4bfbb6ae', 12, 'MASTERS', 1800),
+('0a3c6d87-554d-4e7a-91d7-33d5ef525dd2', 'f5c8d91c-e110-494d-9079-381a56b870eb', 12, 'MASTERS', 2800.00),
+('2f1c02c3-40bf-4215-bd0e-7a84b244bf8b', '0b39d2c7-b438-492e-8923-12e09784a001', 12, 'MASTERS', 2800.00),
+('9b504b06-1802-4e15-8ff1-92d59fb621c6', '4133cf0d-9c72-4c2a-ae90-d12d5373d6a9', 12, 'BACHELORS',  1200.00),
+('1c4e5227-6cb7-4fcd-8b5e-146f72e2d53e', 'fbd5d016-c6e5-44b8-9c2a-93d6c58717c1', 12, 'BACHELORS', 2800.00),
+('7f3d6d1f-8a3f-4e2a-bc6a-14e6d47b23f9', '62d8f7e1-66b8-4675-8c37-2b9e4b01a1fe', 12, 'BACHELORS',  1200.00),
+('5a2a1b5a-43ac-4c8d-9648-eb4fb96e1082', '71954195-af43-4ef3-a3a7-d5df4b4224d8', 12, 'BACHELORS',  1200.00);
+
+
+

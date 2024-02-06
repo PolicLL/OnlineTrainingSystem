@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/select.css}">
+    <link rel="stylesheet" th:href="@{/css/hand.css}">
+</head>
+<body>
+
+<div th:insert="~{fragments/navigation :: navigation('/admins')}"></div>
+<br>
+<br>
+<br>
+<br>
+<div> <a th:href="@{/admins/users}" class="become-link" style="width:70px">Users</a></div>
+<br>
+<div> <a th:href="@{/exercise}" class="become-link" style="width:70px">Exercises</a></div>
+<br>
+<div> <a th:href="@{/admins/contracts}" class="become-link" style="width:70px">Contracts</a></div>
+<br>
+</body>
+</html>

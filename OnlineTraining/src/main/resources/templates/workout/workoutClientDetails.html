@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Client Details</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/hand.css}">
+    <link rel="stylesheet" th:href="@{/css/details.css}">
+    <link rel="stylesheet" th:href="@{/css/confirmation.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        select:disabled {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/workout/details')}"></div>
+<br>
+<br>
+<br>
+<header>
+    <h1 class="header-1">Workout Details</h1>
+</header>
+<br>
+<a th:href="@{/report/show(id=${workout.id})}">
+    <button type="button" class="become-link">See in PDF</button>
+</a>
+<br>
+<br>
+
+<table>
+        <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Number of Reps</th>
+            <th>Pause After Exercise (Seconds)</th>
+            <th>Weight</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over each WorkoutSession -->
+        <tr th:each="workoutSession, rowStat : ${workout.workoutSessions}">
+
+            <td>
+
+                <select th:field="*{workout.workoutSessions[__${rowStat.index}__].exercise.id}" disabled>
+                    <option value="" disabled>Select Exercise</option>
+                    <option th:each="exercise : ${listExercises}"
+                            th:value="${exercise.id}"
+                            th:text="${exercise.name}"
+                            th:selected="${exercise.id == workoutSession.exercise.id}">
+                    </option>
+                </select>
+            </td>
+            <td>
+                <input type="number" th:field="*{workout.workoutSessions[__${rowStat.index}__].numberOfReps}" required min="1" class="table__login" readonly="readonly">
+            </td>
+            <td>
+                <input type="number" th:field="*{workout.workoutSessions[__${rowStat.index}__].pauseAfterExerciseInSeconds}" required min="30" class="table__login" readonly="readonly">
+            </td>
+            <td>
+                <input type="number" th:field="*{workout.workoutSessions[__${rowStat.index}__].weight}" required min="1" class="table__login" readonly="readonly">
+            </td>
+
+            <td th:if="${workout.workoutSessions[__${rowStat.index}__].exercise.id != null}">
+                <a th:href="@{/exercise/client-details/{id}(id=${workout.workoutSessions[__${rowStat.index}__].exercise.id})}" class="become-link"> Details</a>
+            </td>
+            <td th:unless="${workout.workoutSessions[__${rowStat.index}__].exercise.id}">
+                <a th:href="@{/exercise/progress}" class="become-link">In Progress</a>
+            </td>
+
+
+        </tr>
+
+        </tbody>
+    </table>
+
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Registration</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/coaches/register')}"></div>
+<main class="align">
+<div class="login">
+    <header class="login__header">
+        <h2 class="align">Coach Registration Form</h2>
+    </header>
+
+    <form th:action="@{'/coaches/register'}" th:object="${coach}" method="post" class="login__form">
+        <input type="hidden" name="userId" th:value="${userId}" />
+
+        <label for="yearsOfExperience">Years of Experience:</label>
+        <input type="number" id="yearsOfExperience" step="0.5" name="yearsOfExperience" th:field="*{yearsOfExperience}" required placeholder="Enter years of experience" />
+
+        <label for="education">Education:</label>
+        <select id="education" name="education" th:field="*{education}" required>
+            <option th:each="edu : ${T(com.training.OnlineTraining.model.enums.Education).values()}"
+                    th:value="${edu}" th:text="${#strings.capitalize(edu.name())}">
+            </option>
+        </select>
+        <label for="monthlyPrice">Monthly Price in €:</label>
+        <input type="number" id="monthlyPrice" step="0.01" name="monthlyPrice" th:field="*{monthlyPrice}" required placeholder="Enter monthly price" />
+
+        <div>
+            <input class="button" type="submit" value="Register">
+        </div>
+        <div th:if="${error}" class="error" style="color: red;">
+            <p th:text="${error}"></p>
+        </div>
+    </form>
+</div>
+</main>
+<script th:src="@{/js/noBack.js}"></script>
+</body>
+</html>

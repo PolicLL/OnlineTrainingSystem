@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout form</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/workout/update')}"></div>
+<main class="align">
+    <div class="login">
+        <br>
+        <br>
+        <header class="login__header">
+            <h2 class="align">Update Workout</h2>
+        </header>
+        <form th:action="@{'/workout/update/' + ${workout.id}}" th:object="${workout}" method="post" class="login__form">
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="date">Today's Date of Workout</label>
+            <input type="date" id="date" th:field="*{dateOfWorkout}"  th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" readonly/>
+
+            <label for="ordinal">Ordinal Number of Workout</label>
+            <input type="number" id="ordinal" th:field="*{ordinalNumberOfWorkout}" readonly/>
+
+            <label for="exercises">Number of Exercises:</label>
+            <input type="number" id="exercises" th:field="*{numberOfExercises}" readonly>
+
+            <label for="time" >Warming Up Time (in seconds):</label>
+            <input type="number"  id="time" th:field="*{warmingUpTimeInSeconds}" readonly>
+
+            <label for="sets">Number of Sets:</label>
+            <input type="number"  id="sets" th:field="*{numberOfSets}" readonly>
+
+            <label  for="pause">Pause Between Sets (in seconds):</label>
+            <input type="number" id="pause" th:field="*{pauseBetweenSetsInSeconds}" readonly>
+
+            <label for="rating">Self rating (1 to 5)</label>
+            <input type="number" id="rating" th:field="*{selfRating}" min="1" max="5">
+
+            <label for="status">Status</label>
+            <select id="status" th:field="*{workoutStatus}">
+                <option th:each="status : ${workoutStatuses}"
+                        th:value="${status}"
+                        th:text="${status.displayName}">
+                </option>
+            </select>
+            <input type="hidden" th:field="*{nextWorkout}" />
+
+            <div>
+                <input class="button" type="submit" value="Update">
+            </div>
+        </form>
+    </div>
+</main>
+<script>
+    document.getElementById('date').valueAsDate = new Date();
+</script>
+</body>
+</html>

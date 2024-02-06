@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <script th:src="@{/js/filterUsers.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/admins')}"></div>
+<main class="align">
+    <div class="login">
+        <header class="login__header">
+            <h2 class="align">Update User</h2>
+        </header>
+
+<form th:action="@{/admins/users/update}" method="post" th:object="${user}"  class="login__form">
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" th:field="*{firstName}" required />
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" th:field="*{lastName}" required />
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}" required />
+
+    <label for="street">Street:</label>
+    <input type="text" id="street" th:field="*{street}" required>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" th:field="*{city}" required>
+
+    <label for="country">Country:</label>
+    <select id="country" th:field="*{country}" required>
+        <option th:each="c : ${T(com.training.OnlineTraining.model.enums.Country).values()}"
+                th:value="${c}" th:text="${c.country}" th:selected="${user.country == c}">
+        </option>
+    </select>
+
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" required>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" th:field="*{gender}" required>
+        <option value="Male" th:selected="${user.gender == 'Male'}">Male</option>
+        <option value="Female" th:selected="${user.gender == 'Female'}">Female</option>
+    </select>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" th:field="*{age}" required min="1" max="119">
+
+    <input class="button" type="submit" value="Update">
+</form>
+    </div>
+</main>
+</body>
+</html>

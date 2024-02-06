@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Your head content -->
+    <title>Workout Session Details</title>
+</head>
+<body>
+<h2 class="margin">Workout Session Details</h2>
+<ul>
+    <li><strong>ID:</strong> <span th:text="${workoutSession.id}"></span></li>
+    <li><strong>Workout ID:</strong> <span th:text="${workoutSession.workoutId}"></span></li>
+    <li><strong>Exercise ID:</strong> <span th:text="${workoutSession.exerciseId}"></span></li>
+    <li><strong>Number of Reps:</strong> <span th:text="${workoutSession.numberOfReps}"></span></li>
+    <li><strong>Pause After Exercise (s):</strong> <span th:text="${workoutSession.pauseAfterExerciseInSeconds}"></span></li>
+    <li><strong>Weight:</strong> <span th:text="${workoutSession.weight}"></span></li>
+    <!-- Add more details if needed -->
+</ul>
+</body>
+</html>

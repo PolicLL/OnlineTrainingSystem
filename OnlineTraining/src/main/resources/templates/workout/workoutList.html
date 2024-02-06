@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout List</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/hand.css}">
+    <link rel="stylesheet" th:href="@{/css/select.css}">
+    <link rel="stylesheet" th:href="@{/css/confirmation.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/workout')}"></div>
+<br>
+<br>
+<br>
+<header>
+    <h1 class="header-1">Workout List</h1>
+</header>
+
+<a th:href="@{/workout/create}" class="link-border">Create New Empty Workout</a>
+
+<a th:href="@{/workout/create-template}" class="link-border">Create New Workout Using Templates</a>
+
+<br>
+<br>
+
+<table th:if="${workoutsList != null and not #lists.isEmpty(workoutsList)}">
+    <thead>
+    <tr>
+        <th>Client's Date of Workout</th>
+        <th>Ordinal Number of Workout</th>
+        <th>Number of Exercises</th>
+        <th>Warming Up Time (in seconds)</th>
+        <th>Number of Sets</th>
+        <th>Pause Between Sets (in seconds)</th>
+        <th>Training Duration</th>
+        <th>Client's Self Rating</th>
+        <th>Client's Status</th>
+        <th>Next Workout</th>
+        <th>Details</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="workout : ${workoutsList}">
+        <td th:text="${#dates.format(workout.dateOfWorkout, 'dd-MM-yyyy')}"></td>
+        <td th:text="${workout.ordinalNumberOfWorkout}"></td>
+        <td th:text="${workout.numberOfExercises}"></td>
+        <td th:text="${workout.warmingUpTimeInSeconds + ' seconds'}"></td>
+        <td th:text="${workout.numberOfSets}"></td>
+        <td th:text="${workout.pauseBetweenSetsInSeconds + ' seconds'}"></td>
+        <td th:text="${workout.getDuration()}"></td>
+        <td th:text="${workout.selfRating}"></td>
+        <td th:text="${workout.workoutStatus}"></td>
+        <td th:text="${workout.nextWorkout}"></td>
+        <td>
+            <a th:href="@{/workout/details/{id}(id=${workout.id})}" class="become-link">Details</a>
+        </td>
+
+        <td>
+            <a th:href="@{/workout/update/{id}(id=${workout.id})}" class="become-link">Update</a>
+        </td>
+
+        <td>
+            <!-- Delete button with confirmation -->
+            <form th:action="@{/workout/delete/{id}(id=${workout.id})}" method="post" onsubmit="return showConfirmation(this)">
+                <button type="submit" class="become-link"  style="height: 42px;">Delete</button>
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+<p th:if="${workoutsList != null and #lists.isEmpty(workoutsList)}" >No Workout lists available.</p>
+
+<div id="confirmation-dialog" class="confirmation-dialog">
+    <div class="confirmation-content">
+        <p>Are you sure you want to delete this workout?</p>
+        <button onclick="confirmDelete()">Yes</button>
+        <button onclick="cancelDelete()">No</button>
+    </div>
+</div>
+
+
+<script th:src="@{/js/confirmation.js}"></script>
+
+</body>
+</html>

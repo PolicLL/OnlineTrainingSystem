@@ -1,0 +1,27 @@
+.greeting p {
+    display: inline;
+    margin-left:20px;
+    padding: 5px;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 1.7em;
+    color: #333;
+}
+
+.greeting .hand {
+    display: inline-block;
+    font-size: 1.5em;
+    animation: wave 2s infinite;
+    transform-origin: 80% 40%;
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    20%, 60% {
+        transform: rotate(-25deg);
+    }
+    40%, 80% {
+        transform: rotate(20deg);
+    }
+}

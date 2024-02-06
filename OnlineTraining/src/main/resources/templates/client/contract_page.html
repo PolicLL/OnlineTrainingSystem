@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/contracts/personal')}"></div>
+
+<main class="align">
+    <div class="login">
+        <header class="login__header">
+            <h2 class="align">Make a contract</h2>
+        </header>
+
+<form th:action="@{'/contracts/' + ${coachId}}" th:object="${contract}" method="post" class="login__form">
+
+    <input type="hidden" name="coach" th:value="${coachId}" />
+    <input type="hidden" name="client" th:value="${clientId}" />
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" th:field="*{startDate}"  th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required />
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" th:field="*{endDate}" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required />
+
+    <label for="monthlyPrice">Monthly Price in €:</label>
+    <input type="text" id="monthlyPrice" name="monthlyPrice" th:value="${monthlyPrice}" readonly required />
+
+    <div>
+        <input class="button" type="submit" value="Submit">
+    </div>
+</form>
+    </div>
+</main>
+
+<script th:src="@{/js/date.js}"></script>
+</body>
+</html>

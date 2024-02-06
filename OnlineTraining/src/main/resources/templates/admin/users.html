@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/select.css}">
+    <link rel="stylesheet" th:href="@{/css/hand.css}">
+    <link rel="stylesheet" th:href="@{/css/confirmation.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <script th:src="@{/js/filterUsers.js}"></script>
+</head>
+<body>
+
+<div th:insert="~{fragments/navigation :: navigation('/admins')}"></div>
+<br>
+<br>
+<br>
+<header>
+    <h1 class="header-1">List of Users</h1>
+</header>
+<br>
+
+<form th:action="@{/admins/users}" method="get" onsubmit="filterUsers(); return false;">
+    <div class="select">
+        <select id="roleFilter" name="roleFilter">
+            <option value="">Select role</option>
+            <option th:each="role : ${availableRoles}"
+                    th:value="${role.name()}" th:text="${role.name()}"></option>
+        </select>
+    </div>
+    <br>
+    <button type="submit" class="become-link">Apply Filter</button>
+</form>
+    <br>
+
+
+    <br>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Phone Number</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Update</th>
+            <th>Delete</th>
+
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.street}"></td>
+            <td th:text="${user.city}"></td>
+            <td th:text="${user.country}"></td>
+            <td th:text="${user.phoneNumber}"></td>
+            <td th:text="${user.gender}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <a th:if="${#strings.trim(user.role) != 'ADMIN'}" th:href="@{/admins/users/update/{id}(id=${user.id})}" class="become-link">Update</a>
+            </td>
+
+            <td >
+                <form th:action="@{/admins/users/delete/{id}(id=${user.id})}"
+                      th:if="${#strings.trim(user.role) != 'ADMIN'}"
+                      method="post"
+                      onsubmit="return showConfirmation(this);">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="become-link" style="height: 42px;">Delete</button>
+                </form>
+            </td>
+
+        </tr>
+    </table>
+<div id="confirmation-dialog" class="confirmation-dialog">
+    <div class="confirmation-content">
+        <p>Are you sure you want to delete this user?</p>
+        <button onclick="confirmDelete()">Yes</button>
+        <button onclick="cancelDelete()">No</button>
+    </div>
+</div>
+<script th:src="@{/js/confirmation.js}"></script>
+
+</body>
+</html>

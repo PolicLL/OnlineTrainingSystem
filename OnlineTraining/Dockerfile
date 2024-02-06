@@ -1,0 +1,7 @@
+FROM postgres:latest
+
+ENV POSTGRES_DB=OnlineTrainingSystem
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=123
+
+EXPOSE 5432

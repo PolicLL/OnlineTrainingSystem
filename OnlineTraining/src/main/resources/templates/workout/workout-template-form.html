@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Template Form</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/workout/update')}"></div>
+<main class="align">
+    <div class="login">
+        <br>
+        <br>
+        <header class="login__header">
+            <h2 class="align">Workout Template Form</h2>
+        </header>
+
+<form th:action="@{/workout/create-template}" th:object="${workoutTemplate}" method="post" class="login__form">
+    <label for="workoutType">Workout Type:</label>
+    <select id="workoutType" th:field="*{workoutType}">
+        <option th:each="type : ${T(com.training.OnlineTraining.model.enums.WorkoutType).values()}" th:value="${type}" th:text="${type}"></option>
+    </select>
+
+    <label for="workoutGoal">Workout Goal:</label>
+    <select th:field="*{workoutGoal}" id="workoutGoal">
+        <option th:each="goal : ${T(com.training.OnlineTraining.model.enums.WorkoutGoal).values()}" th:value="${goal}" th:text="${goal}"></option>
+    </select>
+
+    <label for="numberOfExercises">Number of Exercises:</label>
+    <input type="number" th:field="*{numberOfExercises}" id="numberOfExercises" required min="1" max="5"/>
+
+    <label for="nextWorkout">Next workout:</label>
+    <select th:field="*{nextWorkout}" id="nextWorkout">
+        <option th:each="nextWorkout : ${T(com.training.OnlineTraining.model.enums.WorkoutType).values()}" th:value="${nextWorkout}" th:text="${nextWorkout}"></option>
+    </select>
+
+    <div>
+        <input class="button" type="submit" value="Create Workout">
+    </div>
+
+</form>
+    </div>
+</main>
+
+</body>
+</html>

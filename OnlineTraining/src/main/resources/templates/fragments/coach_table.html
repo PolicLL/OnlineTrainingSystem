@@ -1,0 +1,31 @@
+<div th:fragment="coach_table" xmlns:th="http://www.w3.org/1999/xhtml">
+    <table id="coachesTable" th:if="${coaches}">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Years of Experience</th>
+            <th>Education</th>
+            <th>Monthly Price</th>
+            <th>Make a contract</th>
+        </tr>
+        <tr th:each="coach : ${coaches}">
+            <td th:text="${coach.coachUserDTO.firstName}"></td>
+            <td th:text="${coach.coachUserDTO.lastName}"></td>
+            <td th:text="${coach.coachUserDTO.city}"></td>
+            <td th:text="${coach.coachUserDTO.country}"></td>
+            <td th:text="${coach.coachUserDTO.gender}"></td>
+            <td th:text="${coach.coachUserDTO.age}"></td>
+            <td th:text="${coach.yearsOfExperience}"></td>
+            <td th:text="${coach.education}"></td>
+            <td th:text="${coach.monthlyPrice}"></td>
+            <td>
+                <a th:href="@{'/contracts/' + ${coach.id}}" class="become-link">Select Coach</a>
+            </td>
+        </tr>
+    </table>
+
+</div>

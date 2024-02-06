@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Registration</title>
+  <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+  <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/clients/register')}"></div>
+<main class="align">
+<div class="login">
+  <header class="login__header">
+    <h2 class="align">Client Registration Form</h2>
+  </header>
+
+<form action="/clients/register" th:object="${client}" method="post" class="login__form">
+  <input type="hidden" name="userId" th:value="${userId}" />
+
+  <label for="medicalCondition">Medical Condition:</label>
+  <textarea id="medicalCondition" name="medicalCondition" th:field="*{medicalCondition}" style="font-family: 'Varela Round'; font-size: 1.1rem;" placeholder="..." rows="4"/></textarea>
+
+  <label for="injuries">Injuries:</label>
+  <textarea id="injuries" name="injuries" th:field="*{injuries}"  style="font-family: 'Varela Round'; font-size: 1.1rem;" placeholder="..." rows="4"/></textarea>
+
+     <div>
+       <input class="button" type="submit" value="Register">
+     </div>
+    <div th:if="${error}" class="error" style="color: red;">
+          <p th:text="${error}"></p>
+    </div>
+  </form>
+  </div>
+</main>
+<script th:src="@{/js/noBack.js}"></script>
+ </body>
+</html>

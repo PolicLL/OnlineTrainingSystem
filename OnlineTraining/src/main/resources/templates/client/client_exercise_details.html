@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise List</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/hand.css}">
+    <link rel="stylesheet" th:href="@{/css/choosing.css}">
+    <link rel="stylesheet" th:href="@{/css/confirmation.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/workout/details')}"></div>
+<br>
+<br>
+<br>
+<header>
+    <h1 class="header-1">Exercise Details</h1>
+</header>
+<br>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Equipment needed</th>
+        <th>Difficulty Level</th>
+    </tr>
+    </thead>
+
+    <tr>
+        <td th:text="${exercise.name}"></td>
+        <td th:text="${exercise.description}"></td>
+        <td th:text="${exercise.exerciseEquipment}"></td>
+        <td th:text="${exercise.exerciseDifficultyLevel}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

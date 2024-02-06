@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout details</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/hand.css}">
+    <link rel="stylesheet" th:href="@{/css/details.css}">
+    <link rel="stylesheet" th:href="@{/css/confirmation.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/workout/details')}"></div>
+<br>
+<br>
+<br>
+
+<header>
+    <h1 class="header-1">Workout Details </h1>
+</header>
+<br>
+<a th:href="@{/workoutSession/create(workoutID=${workout.id})}" style="display: inline-block;">
+    <button type="button" class="become-link">Create New Workout Session</button>
+</a>
+<a th:href="@{/report/show(id=${workout.id})}" style="display: inline-block;">
+    <button type="button" class="become-link">See in PDF</button>
+</a>
+
+<br>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Client's Date of Workout</th>
+        <th>Ordinal Number of Workout</th>
+        <th>Number of Exercises</th>
+        <th>Warming Up Time (in seconds)</th>
+        <th>Number of Sets</th>
+        <th>Pause Between Sets (in seconds)</th>
+        <th>Duration of the Workout</th>
+        <th>Client's Self Rating</th>
+        <th>Next Workout</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Display details of the workout -->
+    <tr>
+        <td th:text="${workout.dateOfWorkout}"></td>
+        <td th:text="${workout.ordinalNumberOfWorkout}"></td>
+        <td th:text="${workout.numberOfExercises}"></td>
+        <td th:text="${workout.warmingUpTimeInSeconds}"></td>
+        <td th:text="${workout.numberOfSets}"></td>
+        <td th:text="${workout.pauseBetweenSetsInSeconds}"></td>
+        <td th:text="${workout.getDuration}"></td>
+        <td th:text="${workout.selfRating}"></td>
+        <td th:text="${workout.nextWorkout}"></td>
+
+        <td> <a th:href="@{/workout/update/{id}(id=${workout.id})}" class="become-link">Update</a></td>
+        <td>
+            <form th:action="@{/workout/delete/{id}(id=${workout.id})}" method="post" onsubmit="return confirmDeleteWorkout()">
+                <button type="submit" class="become-link"  style="height: 42px;">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<header>
+    <h1 class="header-1">Exercises</h1>
+</header>
+<br>
+<!-- Form for Workout Details with Workout Sessions -->
+<form th:action="@{/workoutSession/update/{workoutID}(workoutID=${workout.id})}" method="post">
+    <table>
+        <!-- Workout details section -->
+        <!-- ...Existing workout details table content... -->
+
+        <!-- Workout sessions details section -->
+        <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Number of Reps</th>
+            <th>Pause After Exercise (Seconds)</th>
+            <th>Weight</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over each WorkoutSession -->
+        <tr th:each="workoutSession, rowStat : ${workout.workoutSessions}">
+
+            <input type="hidden" th:field="*{workout.workoutSessions[__${rowStat.index}__].id}">
+
+            <!-- Hidden input for Workout ID -->
+            <input type="hidden" th:field="*{workout.workoutSessions[__${rowStat.index}__].workout.id}">
+
+
+            <td>
+                <!-- Dropdown to select exercise -->
+                <select th:field="*{workout.workoutSessions[__${rowStat.index}__].exercise.id}" required>
+                    <option value="" th:selected="true" disabled>Select Exercise</option>
+                    <option th:each="exercise : ${listExercises}"
+                            th:value="${exercise.id}"
+                            th:text="${exercise.name}"
+                            th:selected="${exercise.id == workoutSession.exercise.id}"> <!-- Set selected option -->
+                    </option>
+                </select>
+
+            </td>
+            <td>
+                <input type="number" th:field="*{workout.workoutSessions[__${rowStat.index}__].numberOfReps}" required min="1" class="table__login">
+            </td>
+            <td>
+                <input type="number" th:field="*{workout.workoutSessions[__${rowStat.index}__].pauseAfterExerciseInSeconds}" required min="5" class="table__login">
+            </td>
+            <td>
+                <input type="number" th:field="*{workout.workoutSessions[__${rowStat.index}__].weight}" required min="1" class="table__login">
+            </td>
+            <!-- Delete button column -->
+            <td>
+                <form id="deleteForm" method="post">
+                    <input type="hidden" name="workoutID" th:value="${workout.id}" />
+                    <input type="hidden" name="workoutSessionID" th:value="${workout.workoutSessions[__${rowStat.index}__].id}" />
+                    <button type="button" onclick="confirmDelete(this)" class="become-link"  style="height: 42px;">Delete</button>
+                </form>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>  <button type="submit" class="become-link">Update All</button></td>
+        </tr>
+
+        </tbody>
+    </table>
+</form>
+
+<script th:inline="javascript">
+    function confirmDelete(button) {
+        console.log('Starting deletion process...');
+
+        if (confirm('Are you sure you want to delete this session?')) {
+            console.log('User confirmed deletion.');
+
+            var workoutID = button.parentNode.querySelector('input[name="workoutID"]').value;
+            console.log('Workout ID retrieved: ' + workoutID);
+
+            var workoutSessionID = button.parentNode.querySelector('input[name="workoutSessionID"]').value;
+            console.log('Workout Session ID retrieved: ' + workoutSessionID);
+
+            var deleteForm = button.parentNode.closest('form'); // Find the closest form
+            console.log('Delete form element type: ' + (deleteForm ? deleteForm.tagName : 'Form element not found'));
+
+            if (deleteForm && deleteForm.tagName === 'FORM') {
+                console.log('Preparing to delete...');
+                deleteForm.action = '/workoutSession/delete/' + workoutID + '/' + workoutSessionID;
+                console.log('Form action updated for deletion.');
+                deleteForm.submit();
+                console.log('Deletion form submitted.');
+            } else {
+                console.error('Error: Form element not found or incorrect.');
+            }
+        } else {
+            console.log('Deletion cancelled by user.');
+        }
+    }
+
+    function confirmDeleteWorkout() {
+        return confirm("Are you sure you want to delete this workout?");
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Contract</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <script th:src="@{/js/filterUsers.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/admins')}"></div>
+<main class="align">
+    <div class="login">
+        <header class="login__header">
+            <h2 class="align">Update User</h2>
+        </header>
+
+        <form th:action="@{/admins/contracts/update}" method="post" th:object="${contract}"  class="login__form">
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" name="coach" th:value="${coachId}" />
+            <input type="hidden" name="client" th:value="${clientId}" />
+
+
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" th:field="*{startDate}" required />
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" th:field="*{endDate}" required />
+
+            <label for="monthlyPrice">Monthly Price in €:</label>
+            <input type="number" id="monthlyPrice" th:field="*{monthlyPrice}" th:value="${monthlyPrice}"  required />
+
+
+            <input class="button" type="submit" value="Update">
+        </form>
+    </div>
+</main>
+</body>
+</html>

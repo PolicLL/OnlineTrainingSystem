@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Exercise</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navigation :: navigation('/register')}"></div>
+<main class="align">
+    <div class="login">
+        <br>
+        <br>
+        <header class="login__header">
+            <h2 class="align">Update Exercise</h2>
+        </header>
+<form th:action="@{'/exercise/update/' + ${exerciseForUpdating.id}}" method="post" th:object="${exerciseForUpdating}" class="login__form" >
+    <input type="hidden" th:field="*{id}"/>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required/>
+
+    <label for="desc">Description:</label>
+    <textarea th:field="*{description}" id="desc" rows="4" style="font-family: 'Varela Round'; font-size: 1.1rem;" required></textarea>
+
+    <label for="req">Equipment Needed:</label>
+    <select id="req" th:field="*{exerciseEquipment}" required>
+        <option value="" disabled>Select exercise equipment</option>
+        <option th:each="equipment : ${exerciseEquipmentList}"
+                th:value="${equipment}" th:text="${equipment.displayName}">
+        </option>
+    </select>
+
+    <label for="diff">Difficulty Level:</label>
+    <select  id="diff" th:field="*{exerciseDifficultyLevel}" required>
+        <option value="" disabled>Select difficulty level</option>
+        <option th:each="level : ${difficultyLevels}"
+                th:value="${level}" th:text="${level}">
+        </option>
+    </select>
+
+    <div>
+        <input class="button" type="submit" value="Register">
+    </div>
+</form>
+    </div>
+</main>
+</body>
+</html>

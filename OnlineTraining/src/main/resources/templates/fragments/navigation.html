@@ -1,0 +1,31 @@
+<th:block  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<ul th:fragment="navigation(currentUrl)">
+    <li th:class="${currentUrl == '/' ? 'active' : ''}" sec:authorize="isAuthenticated()">
+        <a href="/"><img src="/images/home.png" alt="Home"><br> <span class="small-text">Home</span></a>
+    </li>
+    <li  th:class="${currentUrl == '/contracts/personal' ? 'active' : ''}" sec:authorize="hasAnyAuthority('ADMIN', 'CLIENT')">
+        <a href="/contracts/personal"><img src="/images/client.png" alt="Contract"> <br> <span class="small-text">Client</span></a>
+    </li>
+    <li  th:class="${currentUrl == '/coaches/coach-page' ? 'active' : ''}" sec:authorize="hasAnyAuthority('ADMIN', 'COACH')">
+        <a href="/coaches/coach-page"><img src="/images/coach.png" alt="Coach page"> <br> <span class="small-text">Coach</span></a>
+    </li>
+    <li th:class="${currentUrl == '/clients/client-page' ? 'active' : ''}" sec:authorize="hasAnyAuthority('ADMIN', 'CLIENT')">
+        <a href="/clients/client-page"><img src="/images/contract.png" alt="Client page"> <br> <span class="small-text">Contracts</span></a>
+    </li>
+    <li th:class="${currentUrl == '/admins' ? 'active' : ''}" sec:authorize="hasAuthority('ADMIN')">
+        <a href="/admins"><img src="/images/admin.png" alt="Admin page"> <br> <span class="small-text">Admin</span></a>
+    </li>
+    <li style="float:right" th:class="${currentUrl == '/clients/settings' ? 'active' : ''}" sec:authorize="hasAuthority('CLIENT')">
+        <a href="/clients/settings"><img src="/images/settings.png" alt="Settings"><br> <span class="small-text">Settings</span></a>
+    </li>
+    <li style="float:right" th:class="${currentUrl == '/coaches/settings' ? 'active' : ''}" sec:authorize="hasAuthority('COACH')">
+        <a href="/coaches/settings"><img src="/images/settings.png" alt="Settings"> <br> <span class="small-text">Settings</span></a>
+    </li>
+    <li style="float:right" sec:authorize="isAuthenticated()"> <a href="/logout"><img src="/images/logout.png" alt="Logout"><br>
+        <span class="small-text">Logout</span></a></li>
+    <li style="float:right" th:class="${currentUrl == '/login' ? 'active' : ''}" sec:authorize="!isAuthenticated()">
+        <a href="/login"><img src="/images/login.png" alt="Login" ><br> <span class="small-text">Login</span></a>
+    </li>
+</ul>
+</th:block>
+

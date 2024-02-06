@@ -1,0 +1,24 @@
+INSERT INTO User_table (id, first_name, last_name, email, street, city, country, phone_number, gender, age, password, role)
+VALUES
+('0b2ae5a0-3322-4a75-ba4b-f55f5b23f818', 'John', 'Doe', 'johndoe@example.com', '123 Main St', 'Anytown', 'USA', '+123456789012', 'Male', 35, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'CLIENT'),
+('b4f2c5e8-9f6d-4f1c-b201-6e4b3a85b1c9', 'Sophia', 'Walker', 'sophiaw@example.com', '1313 Maple St', 'Megalopolis', 'Germany', '+4901122334455', 'Female', 35, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('6f8a2c31-bda4-4f27-97b1-fb4b123e890a', 'David', 'Brown', 'davidbrown@example.com', '555 Pine St', 'Townsville', 'Germany', '+491234567890', 'Male', 45, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'CLIENT'),
+('1a6e3a4f-79d9-4f92-b7b5-c1c5b0f98a55', 'Emily', 'Johnson', 'emily.j@example.com', '456 Elm St', 'Smallville', 'Canada', '+145632189078', 'Female', 28, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'CLIENT'),
+('3bfa923e-d8d6-4884-a92e-6782c8d2aaf2', 'Michael', 'Smith', 'michael_smith@example.com', '789 Oak St', 'Bigcity', 'UK', '+447895632145', 'Male', 42, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'CLIENT'),
+('5c1f47a9-8014-47d0-977d-d14af303dd12', 'Sarah', 'Davis', 'sarahdavis@example.com', '1010 Maple Ave', 'Metroville', 'Australia', '+610123456789', 'Female', 31, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'CLIENT'),
+('7d3e4c58-2c5f-4fe1-9a08-1b5b6c7d8e9f', 'Emma', 'White', 'emmawhite@example.com', '777 Cedar St', 'Villagetown', 'USA', '+112233445566', 'Female', 40, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('8b0a1f22-685f-4a63-8c47-20c2a74392f1', 'Daniel', 'Taylor', 'danieltaylor@example.com', '888 Birch St', 'Cityville', 'Canada', '+17778889999', 'Male', 33, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('9e6b5487-3e5b-4912-aa01-6b56f64cb66f', 'Olivia', 'Anderson', 'oliviaa@example.com', '999 Pine St', 'Mountainview', 'UK', '+440987654321', 'Female', 28, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('a1c3e9b4-17d7-44da-96f2-25e21f7a781b', 'Matthew', 'Miller', 'matthewm@example.com', '1212 Oak Ave', 'Largetown', 'Australia', '+612345678901', 'Male', 38, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'ADMIN'),
+('1f0ae8e6-50b4-4c9c-9cf3-8424a5e6d7a1', 'OnlineTraining', 'System', 'admin@example.com', '1212 Oak Ave', 'Largetown', 'Australia', '+578377623411', 'Male', 38, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'ADMIN'),
+('bd8b0e4f-8a41-4e7d-ba67-0b6936c2b3d1', 'Alex', 'Williams', 'alexw@example.com', '222 Pine St', 'Townsville', 'USA', '+112233445577', 'Male', 32, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('c917f8e2-69e1-45b3-bb3e-342e33519914', 'Mia', 'Johnson', 'mia.j@example.com', '333 Elm St', 'Smallville', 'Canada', '+145632189123', 'Female', 30, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('d65f25d3-9c0d-4d7b-88d1-0b731cc4e1f0', 'Ryan', 'Garcia', 'ryang@example.com', '444 Oak St', 'Bigcity', 'UK', '+447895632678', 'Male', 40, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('e20bd8a1-07e4-4ad2-9104-685c4bfbb6ae', 'Ava', 'Martin', 'avamartin@example.com', '555 Maple Ave', 'Metroville', 'Australia', '+610123456890', 'Female', 35, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('f5c8d91c-e110-494d-9079-381a56b870eb', 'Ethan', 'Jones', 'ethanj@example.com', '666 Cedar St', 'Villagetown', 'USA', '+112233445588', 'Male', 37, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('0b39d2c7-b438-492e-8923-12e09784a001', 'Hannah', 'Brown', 'hannahb@example.com', '777 Birch St', 'Cityville', 'Canada', '+17778889998', 'Female', 33, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('4133cf0d-9c72-4c2a-ae90-d12d5373d6a9', 'Liam', 'Wilson', 'liamw@example.com', '888 Oak Ave', 'Largetown', 'Australia', '+612345678902', 'Male', 36, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('fbd5d016-c6e5-44b8-9c2a-93d6c58717c1', 'Chloe', 'Clark', 'chloec@example.com', '999 Pine St', 'Mountainview', 'UK', '+440987654322', 'Female', 29, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('62d8f7e1-66b8-4675-8c37-2b9e4b01a1fe', 'Logan', 'Anderson', 'logana@example.com', '1010 Maple Ave', 'Megalopolis', 'Germany', '+4901122334466', 'Male', 31, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH'),
+('71954195-af43-4ef3-a3a7-d5df4b4224d8', 'Madison', 'Smith', 'madisons@example.com', '1313 Maple St', 'Bigcity', 'UK', '+447895632100', 'Female', 34, '$2a$10$DDS5i7vEIt9fN6EFmNc3HOaJLKhqUIn8TGhs/BN2gQxnaDMKuIOCi',  'COACH');
+
