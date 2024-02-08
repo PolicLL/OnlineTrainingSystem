@@ -11,7 +11,6 @@ import com.training.OnlineTraining.service.WorkoutSessionService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,15 +26,8 @@ public class WorkoutSessionServiceImpl implements WorkoutSessionService {
 
 	private final WorkoutSessionRepository workoutSessionRepository;
 	private final WorkoutSessionMapper workoutSessionMapper;
-	private WorkoutService workoutService;
+	private final WorkoutService workoutService;
 	private static final Logger logger = LoggerFactory.getLogger(WorkoutSessionServiceImpl.class);
-
-	@Autowired
-	public void setWorkoutService(WorkoutService workoutService) {
-
-		this.workoutService = workoutService;
-	}
-
 
 	@Override
 	public WorkoutSessionOutputDTO createWorkoutSession(WorkoutSessionInputDTO workoutSessionInputDTO) {

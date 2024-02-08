@@ -54,7 +54,7 @@ public class WorkoutTest {
 
 		workoutInputDTO.setSelfRating(1000);
 
-		WorkoutOutputDTO newWorkout = workoutService.createWorkout(workoutInputDTO, contractID);
+		WorkoutOutputDTO newWorkout = workoutService.createEmptyWorkout(workoutInputDTO, contractID);
 
 		assertNotNull(newWorkout);
 		assertEquals(1000, newWorkout.getSelfRating());
@@ -65,13 +65,13 @@ public class WorkoutTest {
 
 	@Test
 	public void testGetAllExercises() {
-		workoutService.createWorkout(workoutInputDTO, contractID);
+		workoutService.createEmptyWorkout(workoutInputDTO, contractID);
 
 		WorkoutInputDTO workoutInputDTO1 = TestDTOUtils.getWorkoutDTO(contractID);
-		workoutService.createWorkout(workoutInputDTO1, contractID);
+		workoutService.createEmptyWorkout(workoutInputDTO1, contractID);
 
 		WorkoutInputDTO workoutInputDTO2 = TestDTOUtils.getWorkoutDTO(contractID);
-		workoutService.createWorkout(workoutInputDTO2, contractID);
+		workoutService.createEmptyWorkout(workoutInputDTO2, contractID);
 
 		List<WorkoutOutputDTO> workouts = workoutService.getAllWorkouts();
 		assertEquals(numberOfWorkoutsInDatabaseBeforeTest + 3, workouts.size());
@@ -81,7 +81,7 @@ public class WorkoutTest {
 	public void testGetExerciseById() {
 		workoutInputDTO.setSelfRating(1000);
 
-		WorkoutOutputDTO newWorkout = workoutService.createWorkout(workoutInputDTO, contractID);
+		WorkoutOutputDTO newWorkout = workoutService.createEmptyWorkout(workoutInputDTO, contractID);
 
 		WorkoutOutputDTO retreivedWorkout = workoutService.getWorkoutById(newWorkout.getId());
 
@@ -93,7 +93,7 @@ public class WorkoutTest {
 	public void testUpdateExercise() {
 		workoutInputDTO.setSelfRating(1000);
 
-		WorkoutOutputDTO newWorkout = workoutService.createWorkout(workoutInputDTO, contractID);
+		WorkoutOutputDTO newWorkout = workoutService.createEmptyWorkout(workoutInputDTO, contractID);
 
 		WorkoutInputDTO updatedWorkoutInputDTO = TestDTOUtils.getWorkoutDTO(contractID);
 		updatedWorkoutInputDTO.setSelfRating(5500);
@@ -106,7 +106,7 @@ public class WorkoutTest {
 
 	@Test
 	public void testDeleteExercise() {
-		WorkoutOutputDTO newWorkout = workoutService.createWorkout(workoutInputDTO, contractID);
+		WorkoutOutputDTO newWorkout = workoutService.createEmptyWorkout(workoutInputDTO, contractID);
 		workoutService.deleteWorkout(newWorkout.getId());
 		assertEquals(numberOfWorkoutsInDatabaseBeforeTest, workoutService.getAllWorkouts().size());
 	}

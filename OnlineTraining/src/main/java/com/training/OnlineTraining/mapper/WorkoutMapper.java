@@ -16,12 +16,10 @@ public interface WorkoutMapper {
 	WorkoutMapper INSTANCE = Mappers.getMapper(WorkoutMapper.class);
 
 	@Mapping(source = "contract.id", target = "contractId")
-	WorkoutInputDTO toWorkoutInputDTO(Workout workout);
-
-	@Mapping(source = "contract.id", target = "contractId")
 	WorkoutOutputDTO toWorkoutOutputDTO(Workout workout);
 
 	@Mapping(source = "contractId", target = "contract.id")
+	@Mapping(target = "workoutSessions", ignore = true)
 	Workout toWorkout(WorkoutInputDTO workoutInputDTO);
 
 	@Mapping(source = "contractId", target = "contract.id")
