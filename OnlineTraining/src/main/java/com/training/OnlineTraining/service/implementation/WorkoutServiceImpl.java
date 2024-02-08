@@ -26,29 +26,19 @@ import java.util.stream.IntStream;
 public class WorkoutServiceImpl implements WorkoutService {
 
 	private final WorkoutRepository workoutRepository;
-	private final WorkoutMapper workoutMapper;
-
 	private WorkoutSessionRepository workoutSessionRepository;
+
+	private final WorkoutMapper workoutMapper;
 	private WorkoutSessionMapper workoutSessionMapper;
 
 	private static final Logger logger = LoggerFactory.getLogger(WorkoutServiceImpl.class);
 
 	@Override
-	public WorkoutOutputDTO createWorkoutTemplate(WorkoutInputDTO workoutInputDTO, UUID contractID) {
+	public WorkoutOutputDTO createWorkoutUsingTemplate(WorkoutInputDTO workoutInputDTO, UUID contractID) {
 
-		logger.info("Creating new workout.");
+		var savedWorkout = initializeWorkout(workoutInputDTO, contractID);
 
-		workoutInputDTO.setDateOfWorkout(null);
-		workoutInputDTO.setContractId(contractID);
-		workoutInputDTO.setOrdinalNumberOfWorkout(getOrdinalNumberOfNextWorkout(contractID));
-
-		var savedWorkout = workoutRepository.save(workoutMapper.toWorkout(workoutInputDTO));
-
-		if (savedWorkout.getWorkoutSessions() == null)
-			createEmptyWorkoutSessions(workoutInputDTO, savedWorkout);
-
-		else
-			updateCreatedWorkoutSessions(savedWorkout);
+		createWorkoutSessions(workoutInputDTO, savedWorkout);
 
 		logger.info("New workout created.");
 
@@ -56,7 +46,18 @@ public class WorkoutServiceImpl implements WorkoutService {
 	}
 
 	@Override
-	public WorkoutOutputDTO createWorkout(WorkoutInputDTO workoutInputDTO, UUID contractID) {
+	public WorkoutOutputDTO createEmptyWorkout(WorkoutInputDTO workoutInputDTO, UUID contractID) {
+
+		var savedWorkout = initializeWorkout(workoutInputDTO, contractID);
+
+		createEmptyWorkoutSessions(workoutInputDTO, savedWorkout);
+
+		logger.info("New workout created.");
+
+		return workoutMapper.toWorkoutOutputDTO(savedWorkout);
+	}
+
+	private Workout initializeWorkout(WorkoutInputDTO workoutInputDTO, UUID contractID) {
 
 		logger.info("Creating new workout.");
 
@@ -64,18 +65,7 @@ public class WorkoutServiceImpl implements WorkoutService {
 		workoutInputDTO.setContractId(contractID);
 		workoutInputDTO.setOrdinalNumberOfWorkout(getOrdinalNumberOfNextWorkout(contractID));
 
-		var savedWorkout = workoutRepository.save(workoutMapper.toWorkout(workoutInputDTO));
-
-		IntStream.range(0, workoutInputDTO.getNumberOfExercises())
-				.mapToObj(i -> {
-					WorkoutSessionInputDTO workoutSessionInputDTO = new WorkoutSessionInputDTO(savedWorkout);
-					return workoutSessionMapper.toWorkoutSession(workoutSessionInputDTO);
-				})
-				.forEach(workoutSessionRepository::save);
-
-		logger.info("New workout created.");
-
-		return workoutMapper.toWorkoutOutputDTO(savedWorkout);
+		return workoutRepository.save(workoutMapper.toWorkout(workoutInputDTO));
 	}
 
 	private void createEmptyWorkoutSessions(WorkoutInputDTO workoutInputDTO, Workout savedWorkout) {
@@ -88,10 +78,10 @@ public class WorkoutServiceImpl implements WorkoutService {
 				.forEach(workoutSessionRepository::save);
 	}
 
-	private void updateCreatedWorkoutSessions(Workout savedWorkout) {
+	private void createWorkoutSessions(WorkoutInputDTO workoutInputDTO, Workout savedWorkout) {
 
-		savedWorkout.getWorkoutSessions().forEach(workoutSession -> workoutSession.setWorkout(savedWorkout));
-		workoutSessionRepository.saveAll(savedWorkout.getWorkoutSessions());
+		workoutInputDTO.getWorkoutSessions().forEach(workoutSession -> workoutSession.setWorkout(savedWorkout));
+		workoutSessionRepository.saveAll(workoutInputDTO.getWorkoutSessions());
 	}
 
 	private int getOrdinalNumberOfNextWorkout(UUID contractID) {
@@ -144,12 +134,6 @@ public class WorkoutServiceImpl implements WorkoutService {
 	}
 
 	@Override
-	public WorkoutOutputDTO updateWorkout(Workout workout) {
-
-		return workoutMapper.toWorkoutOutputDTO(workoutRepository.save(workout));
-	}
-
-	@Override
 	public void incrementNumberOfExercises(UUID workoutID) {
 
 		WorkoutOutputDTO tempWorkout = getWorkoutById(workoutID);
@@ -185,14 +169,6 @@ public class WorkoutServiceImpl implements WorkoutService {
 		logger.info("Deleting workout with ID: {}", id);
 
 		workoutRepository.deleteById(id);
-	}
-
-	@Override
-	public void deleteAll() {
-
-		logger.info("Deleting all workouts.");
-
-		workoutRepository.deleteAll();
 	}
 
 	@Override

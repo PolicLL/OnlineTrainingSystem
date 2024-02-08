@@ -63,7 +63,7 @@ public class WorkoutControllerTest {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/workout"));
 
-		verify(workoutService, times(1)).createWorkout(any(), eq(contractId));
+		verify(workoutService, times(1)).createEmptyWorkout(any(), eq(contractId));
 	}
 
 	@Test

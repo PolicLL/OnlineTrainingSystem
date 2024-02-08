@@ -61,7 +61,7 @@ public class WorkoutController {
 
 		UUID contractID = (UUID) session.getAttribute("contractID");
 		var workoutInputDTO = workoutTemplateCreatorService.createWorkoutInputDTO(workoutTemplate);
-		workoutService.createWorkoutTemplate(workoutInputDTO, contractID);
+		workoutService.createWorkoutUsingTemplate(workoutInputDTO, contractID);
 
 		return "redirect:/workout";
 	}
@@ -74,7 +74,7 @@ public class WorkoutController {
 
 		UUID contractID = (UUID) session.getAttribute("contractID");
 
-		workoutService.createWorkout(workoutInputDTO, contractID);
+		workoutService.createEmptyWorkout(workoutInputDTO, contractID);
 
 		return "redirect:/workout";
 	}
