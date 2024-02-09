@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @ToString
-public class UserDto {
+public class UserDTO {
 
 	private UUID id;
 	private String firstName = "";
@@ -24,11 +24,11 @@ public class UserDto {
 	private String password = "";
 	private Role role = Role.USER;
 
-	public UserDto() {
+	public UserDTO() {
 
 	}
 
-	public UserDto(String email, String password) {
+	public UserDTO(String email, String password) {
 
 		this.email = email;
 		this.password = password;

@@ -1,7 +1,6 @@
 package com.training.OnlineTraining.service.implementation;
 
-import com.training.OnlineTraining.dto.input.ExerciseInputDTO;
-import com.training.OnlineTraining.dto.output.ExerciseOutputDTO;
+import com.training.OnlineTraining.dto.ExerciseDTO;
 import com.training.OnlineTraining.exceptions.ExerciseNotFoundException;
 import com.training.OnlineTraining.mapper.ExerciseMapper;
 import com.training.OnlineTraining.model.Exercise;
@@ -29,24 +28,24 @@ public class ExerciseServiceImpl implements ExerciseService {
 	private static final Logger logger = LoggerFactory.getLogger(ExerciseServiceImpl.class);
 
 	@Override
-	public ExerciseOutputDTO createExercise(ExerciseInputDTO exerciseInputDTO) {
+	public ExerciseDTO createExercise(ExerciseDTO exerciseDTO) {
 
 		logger.info("Creating new exercise.");
 
-		Exercise exercise = exerciseMapper.toExercise(exerciseInputDTO);
+		Exercise exercise = exerciseMapper.toExercise(exerciseDTO);
 		Exercise savedExercise = exerciseRepository.save(exercise);
 
 		logger.info("New exercise created.");
 
-		return exerciseMapper.toExerciseOutputDTO(savedExercise);
+		return exerciseMapper.toExerciseDTO(savedExercise);
 	}
 
 	@Override
-	public ExerciseOutputDTO getExerciseById(UUID id) {
+	public ExerciseDTO getExerciseById(UUID id) {
 
 		logger.info("Getting exercise by ID: {}", id);
 
-		return exerciseMapper.toExerciseOutputDTO(requireExercise(id));
+		return exerciseMapper.toExerciseDTO(requireExercise(id));
 	}
 
 	private Exercise requireExercise(UUID id) {
@@ -59,31 +58,32 @@ public class ExerciseServiceImpl implements ExerciseService {
 	}
 
 	@Override
-	public Page<ExerciseOutputDTO> getAllExercisesPageable(Pageable pageable) {
+	public Page<ExerciseDTO> getAllExercisesPageable(Pageable pageable) {
 
 		logger.info("Getting all exercises (pageable).");
 
 		return exerciseRepository.findAll(pageable)
-				.map(exerciseMapper::toExerciseOutputDTO);
+				.map(exerciseMapper::toExerciseDTO);
 	}
 
 
 	@Override
-	public List<ExerciseOutputDTO> getAllExercises() {
+	public List<ExerciseDTO> getAllExercises() {
 
 		logger.info("Getting all exercises.");
 
 		return exerciseRepository
 				.findAll()
 				.stream()
-				.map(exerciseMapper::toExerciseOutputDTO)
+				.map(exerciseMapper::toExerciseDTO)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Exercise> getAllExercisesForWorkoutType(WorkoutType workoutType) {
 
-		return exerciseRepository.findAllByWorkoutType(workoutType);
+		return exerciseRepository
+				.findAllByWorkoutType(workoutType);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
 
 	@Override
-	public ExerciseOutputDTO updateExercise(UUID id, ExerciseInputDTO exerciseDetails) {
+	public ExerciseDTO updateExercise(UUID id, ExerciseDTO exerciseDetails) {
 
 		logger.info("Updating exercise with ID: {}", id);
 
@@ -103,7 +103,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 		Exercise updatedExercise = exerciseMapper.toExercise(exerciseDetails);
 		updatedExercise.setId(existingExercise.getId()); // Ensure the ID is preserved
 
-		return exerciseMapper.toExerciseOutputDTO(exerciseRepository.save(updatedExercise));
+		return exerciseMapper.toExerciseDTO(exerciseRepository.save(updatedExercise));
 
 	}
 

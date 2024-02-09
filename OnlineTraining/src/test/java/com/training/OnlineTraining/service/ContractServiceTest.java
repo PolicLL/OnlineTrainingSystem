@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service;
 
 import com.training.OnlineTraining.OnlineTrainingApplication;
-import com.training.OnlineTraining.dto.ContractDto;
+import com.training.OnlineTraining.dto.ContractDTO;
 import com.training.OnlineTraining.model.Client;
 import com.training.OnlineTraining.model.Coach;
 import com.training.OnlineTraining.model.Contract;
@@ -43,7 +43,7 @@ public class ContractServiceTest {
 	private UserService userService;
 
 
-	private ContractDto contractDto;
+	private ContractDTO contractDto;
 	private Client client;
 	private Coach coach;
 
@@ -110,14 +110,14 @@ public class ContractServiceTest {
 
 		Contract createdContract = contractService.createContract(contractDto);
 
-		ContractDto updatedContractDto = TestDTOUtils.getContractDTO(coach, client);
+		ContractDTO updatedContractDTO = TestDTOUtils.getContractDTO(coach, client);
 
-		contractService.updateContract(createdContract.getId(), updatedContractDto);
+		contractService.updateContract(createdContract.getId(), updatedContractDTO);
 
 		Contract updatedContract = contractService.getContractById(createdContract.getId()).orElse(null);
 
 		assertNotNull(updatedContract);
-		assertEquals(updatedContractDto.getMonthlyPrice(), updatedContract.getMonthlyPrice());
+		assertEquals(updatedContractDTO.getMonthlyPrice(), updatedContract.getMonthlyPrice());
 	}
 
 	@Test

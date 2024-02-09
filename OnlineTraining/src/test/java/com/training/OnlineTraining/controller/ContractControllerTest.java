@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.ContractDto;
+import com.training.OnlineTraining.dto.ContractDTO;
 import com.training.OnlineTraining.model.Contract;
 import com.training.OnlineTraining.service.CoachService;
 import com.training.OnlineTraining.service.ContractService;
@@ -53,7 +53,7 @@ public class ContractControllerTest {
 				.andExpect(view().name("client/contract_page"))
 				.andExpect(model().attribute("coachId", coachId))
 				.andExpect(model().attribute("clientId",clientID))
-				.andExpect(model().attribute("contract", instanceOf(ContractDto.class)))
+				.andExpect(model().attribute("contract", instanceOf(ContractDTO.class)))
 				.andExpect(model().attribute("monthlyPrice", 10.00));
 	}
 
@@ -61,7 +61,7 @@ public class ContractControllerTest {
 	@WithMockUser(authorities = {"ADMIN", "CLIENT"})
 	void createContract() throws Exception {
 		UUID coachId = UUID.randomUUID();
-		ContractDto contractDto = new ContractDto(); // Add necessary attributes for the contract DTO
+		ContractDTO contractDto = new ContractDTO(); // Add necessary attributes for the contract DTO
 
 		Contract contract = new Contract();
 		contract.setId(UUID.randomUUID());

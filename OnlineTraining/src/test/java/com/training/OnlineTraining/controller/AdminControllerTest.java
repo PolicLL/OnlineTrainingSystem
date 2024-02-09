@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.enums.Role;
 import com.training.OnlineTraining.service.AdminService;
 import org.junit.jupiter.api.Test;
@@ -64,20 +64,20 @@ public class AdminControllerTest {
 	void getUpdateUserPage() throws Exception {
 		UUID userId = UUID.randomUUID();
 
-		UserDto user = new UserDto();
+		UserDTO user = new UserDTO();
 
 		when(adminService.getUserById(userId)).thenReturn(user);
 
 		mockMvc.perform(get("/admins/users/update/{userId}", userId))
 				.andExpect(status().isOk())
 				.andExpect(view().name("admin/update_user"))
-				.andExpect(model().attribute("user", instanceOf(UserDto.class)));
+				.andExpect(model().attribute("user", instanceOf(UserDTO.class)));
 	}
 
 	@Test
 	@WithMockUser(authorities = {"ADMIN"})
 	void updateUser() throws Exception {
-		UserDto userDto = new UserDto(); // Add necessary attributes for the user DTO
+		UserDTO userDto = new UserDTO(); // Add necessary attributes for the user DTO
 		mockMvc.perform(post("/admins/users/update").flashAttr("user", userDto))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/admins/users"));

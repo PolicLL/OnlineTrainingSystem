@@ -1,9 +1,9 @@
 package com.training.OnlineTraining.service;
 
 import com.training.OnlineTraining.OnlineTrainingApplication;
-import com.training.OnlineTraining.dto.CoachDto;
+import com.training.OnlineTraining.dto.CoachDTO;
 import com.training.OnlineTraining.dto.UpdateCoachDTO;
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.Coach;
 import com.training.OnlineTraining.model.User;
 import com.training.OnlineTraining.utils.TestDTOUtils;
@@ -36,9 +36,9 @@ public class CoachServiceTest {
 	@Autowired
 	private UserService userService;
 
-	private CoachDto coachDto;
+	private CoachDTO coachDto;
 
-	private UserDto userDto;
+	private UserDTO userDto;
 
 	private int numberOfCoachesInDatabaseBeforeTest = 0;
 
@@ -56,7 +56,7 @@ public class CoachServiceTest {
 		coachDto.setYearsOfExperience(5.0);
 		coachService.registerCoach(coachDto, newUser.getId());
 
-		List<CoachDto> coachesAfterTest = coachService.getAllCoaches();
+		List<CoachDTO> coachesAfterTest = coachService.getAllCoaches();
 		assertEquals(numberOfCoachesInDatabaseBeforeTest + 1, coachesAfterTest.size());
 	}
 

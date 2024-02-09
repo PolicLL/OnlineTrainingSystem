@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WorkoutTemplate {
+public class WorkoutTemplateDTO {
 
 	private WorkoutType workoutType;
 	private WorkoutGoal workoutGoal;

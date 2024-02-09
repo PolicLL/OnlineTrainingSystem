@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.service.implementation;
 
-import com.training.OnlineTraining.dto.WorkoutTemplate;
+import com.training.OnlineTraining.dto.WorkoutTemplateDTO;
 import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
 import com.training.OnlineTraining.model.Exercise;
 import com.training.OnlineTraining.model.WorkoutSession;
@@ -29,18 +29,18 @@ public class WorkoutTemplateCreatorServiceImpl implements WorkoutTemplateCreator
 	private final ExerciseService exerciseService;
 
 	@Override
-	public WorkoutInputDTO createWorkoutInputDTO(WorkoutTemplate workoutTemplate) {
+	public WorkoutInputDTO createWorkoutInputDTO(WorkoutTemplateDTO workoutTemplateDTO) {
 
-		logger.info("Creating workout from template: {}", workoutTemplate);
+		logger.info("Creating workout from template: {}", workoutTemplateDTO);
 
 		return WorkoutInputDTO.builder()
-				.numberOfExercises(workoutTemplate.getNumberOfExercises())
+				.numberOfExercises(workoutTemplateDTO.getNumberOfExercises())
 				.warmingUpTimeInSeconds(300)
 				.workoutStatus(WorkoutStatus.WAITING)
-				.numberOfSets(getNumberOfSets(workoutTemplate.getWorkoutGoal()))
-				.pauseBetweenSetsInSeconds(getPauseBetweenSetsInSeconds(workoutTemplate.getWorkoutGoal()))
-				.workoutSessions(getWorkoutSessions(workoutTemplate))
-				.nextWorkout(workoutTemplate.getNextWorkout())
+				.numberOfSets(getNumberOfSets(workoutTemplateDTO.getWorkoutGoal()))
+				.pauseBetweenSetsInSeconds(getPauseBetweenSetsInSeconds(workoutTemplateDTO.getWorkoutGoal()))
+				.workoutSessions(getWorkoutSessions(workoutTemplateDTO))
+				.nextWorkout(workoutTemplateDTO.getNextWorkout())
 				.build();
 	}
 
@@ -66,20 +66,20 @@ public class WorkoutTemplateCreatorServiceImpl implements WorkoutTemplateCreator
 		return pauseInSeconds;
 	}
 
-	private List<WorkoutSession> getWorkoutSessions(WorkoutTemplate workoutTemplate) {
+	private List<WorkoutSession> getWorkoutSessions(WorkoutTemplateDTO workoutTemplateDTO) {
 
-		logger.info("Creating workout sessions for template: {}", workoutTemplate);
+		logger.info("Creating workout sessions for template: {}", workoutTemplateDTO);
 
-		var listOfExercisesForWorkoutType = getExercisesForWorkoutType(workoutTemplate.getWorkoutType(), workoutTemplate.getNumberOfExercises());
+		var listOfExercisesForWorkoutType = getExercisesForWorkoutType(workoutTemplateDTO.getWorkoutType(), workoutTemplateDTO.getNumberOfExercises());
 
 		return listOfExercisesForWorkoutType.stream()
 				.map(exercise -> {
 					logger.info("Creating workout session for exercise: {}", exercise);
 					return WorkoutSession.builder()
 							.exercise(exercise)
-							.numberOfReps(getNumberOfReps(workoutTemplate.getWorkoutGoal()))
-							.pauseAfterExerciseInSeconds(getRestAfterExerciseInSeconds(workoutTemplate.getWorkoutGoal()))
-							.weight(getWeight(workoutTemplate.getWorkoutGoal()))
+							.numberOfReps(getNumberOfReps(workoutTemplateDTO.getWorkoutGoal()))
+							.pauseAfterExerciseInSeconds(getRestAfterExerciseInSeconds(workoutTemplateDTO.getWorkoutGoal()))
+							.weight(getWeight(workoutTemplateDTO.getWorkoutGoal()))
 							.build();
 				})
 				.collect(Collectors.toList());

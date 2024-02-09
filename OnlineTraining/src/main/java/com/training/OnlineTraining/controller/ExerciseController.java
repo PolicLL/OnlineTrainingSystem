@@ -1,7 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.input.ExerciseInputDTO;
-import com.training.OnlineTraining.dto.output.ExerciseOutputDTO;
+import com.training.OnlineTraining.dto.ExerciseDTO;
 import com.training.OnlineTraining.model.enums.ExerciseDifficultyLevel;
 import com.training.OnlineTraining.model.enums.ExerciseEquipment;
 import com.training.OnlineTraining.service.ExerciseService;
@@ -39,18 +38,18 @@ public class ExerciseController {
 
 		model.addAttribute("difficultyLevels", difficultyLevels);
 		model.addAttribute("exerciseEquipmentList", exerciseEquipmentList);
-		model.addAttribute("exercise", new ExerciseInputDTO());
+		model.addAttribute("exercise", new ExerciseDTO());
 
 		return "exercise/exerciseCreateForm";
 	}
 
 	@PostMapping("/create")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'COACH')")
-	public String createExercise(@ModelAttribute ExerciseInputDTO exerciseInputDTO, Model model) {
+	public String createExercise(@ModelAttribute ExerciseDTO exerciseDTO, Model model) {
 
 		logger.info("Creating a new exercise.");
 
-		var createdExercise = exerciseService.createExercise(exerciseInputDTO);
+		var createdExercise = exerciseService.createExercise(exerciseDTO);
 
 		return "redirect:/exercise";
 	}
@@ -75,7 +74,7 @@ public class ExerciseController {
 
 		PageRequest pageRequest = PageRequest.of(page - 1, size);
 
-		Page<ExerciseOutputDTO> exercisePage = exerciseService.getAllExercisesPageable(pageRequest);
+		Page<ExerciseDTO> exercisePage = exerciseService.getAllExercisesPageable(pageRequest);
 
 		model.addAttribute("exercises", exercisePage);
 		model.addAttribute("currentPage", exercisePage.getNumber() + 1);
@@ -102,12 +101,12 @@ public class ExerciseController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String updateExercise(@PathVariable String id, @ModelAttribute("exercise") ExerciseInputDTO exerciseInputDTO, Model model) {
+	public String updateExercise(@PathVariable String id, @ModelAttribute("exercise") ExerciseDTO exerciseDTO, Model model) {
 
 		logger.info("Updating exercise for ID: {}", id);
-		logger.info("ExerciseDTO: {}", exerciseInputDTO);
+		logger.info("ExerciseDTO: {}", exerciseDTO);
 
-		exerciseService.updateExercise(UUID.fromString(id), exerciseInputDTO);
+		exerciseService.updateExercise(UUID.fromString(id), exerciseDTO);
 
 		return "redirect:/exercise";
 	}

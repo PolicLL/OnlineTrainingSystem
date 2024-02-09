@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service.implementation;
 
-import com.training.OnlineTraining.dto.CoachDto;
-import com.training.OnlineTraining.dto.CoachFilterParams;
+import com.training.OnlineTraining.dto.CoachDTO;
+import com.training.OnlineTraining.dto.CoachFilterParamsDTO;
 import com.training.OnlineTraining.dto.UpdateCoachDTO;
 import com.training.OnlineTraining.exceptions.UserNotFoundException;
 import com.training.OnlineTraining.mapper.CoachMapper;
@@ -46,7 +46,7 @@ public class CoachServiceImpl implements CoachService {
 
 	@Transactional
 	@Override
-	public Coach registerCoach(CoachDto coachDto, UUID userId) {
+	public Coach registerCoach(CoachDTO coachDto, UUID userId) {
 
 		var optionalUser = Optional.ofNullable(userService.getUserById(userId));
 
@@ -76,7 +76,7 @@ public class CoachServiceImpl implements CoachService {
 	}
 
 	@Override
-	public List<CoachDto> getAllCoaches() {
+	public List<CoachDTO> getAllCoaches() {
 
 		return coachRepository.findAll().stream()
 				.map(coachMapper::coachToCoachDto)
@@ -84,7 +84,7 @@ public class CoachServiceImpl implements CoachService {
 	}
 
 	@Override
-	public List<CoachDto> filterCoaches(CoachFilterParams filterParams) {
+	public List<CoachDTO> filterCoaches(CoachFilterParamsDTO filterParams) {
 
 		logger.info("Filter Params: {}", filterParams);
 		Specification<Coach> spec = buildSpecification(filterParams);
@@ -97,14 +97,14 @@ public class CoachServiceImpl implements CoachService {
 	}
 
 	@Override
-	public Page<CoachDto> coachesWithPagination(CoachFilterParams filterParams, Pageable pageable) {
+	public Page<CoachDTO> coachesWithPagination(CoachFilterParamsDTO filterParams, Pageable pageable) {
 
 		return coachRepository.findAll(pageable)
 				.map(coachMapper::coachToCoachDto);
 	}
 
 	@Override
-	public Specification<Coach> buildSpecification(CoachFilterParams filterParams) {
+	public Specification<Coach> buildSpecification(CoachFilterParamsDTO filterParams) {
 
 		return Specification
 				.where(CoachSpecifications.filterByGender(filterParams.getGender()))

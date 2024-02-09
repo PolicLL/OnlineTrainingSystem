@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 @Data
-public class CoachFilterParams {
+public class CoachFilterParamsDTO {
 
 	private String gender;
 	private Double experience;

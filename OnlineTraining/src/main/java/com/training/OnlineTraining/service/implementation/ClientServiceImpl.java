@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.service.implementation;
 
-import com.training.OnlineTraining.dto.ClientDto;
+import com.training.OnlineTraining.dto.ClientDTO;
 import com.training.OnlineTraining.dto.UpdateClientDTO;
 import com.training.OnlineTraining.mapper.ClientMapper;
 import com.training.OnlineTraining.model.Client;
@@ -31,7 +31,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Transactional
 	@Override
-	public Client registerClient(ClientDto clientDto, UUID userId) {
+	public Client registerClient(ClientDTO clientDto, UUID userId) {
 
 		Optional<User> optionalUser = Optional.ofNullable(userService.getUserById(userId));
 		var client = new Client();

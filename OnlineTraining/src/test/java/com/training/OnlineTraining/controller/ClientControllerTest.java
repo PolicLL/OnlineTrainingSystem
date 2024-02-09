@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.ClientDto;
+import com.training.OnlineTraining.dto.ClientDTO;
 import com.training.OnlineTraining.dto.UpdateClientDTO;
 import com.training.OnlineTraining.model.Client;
 import com.training.OnlineTraining.model.User;
@@ -51,14 +51,14 @@ public class ClientControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(view().name("client/client_register_page"))
 				.andExpect(model().attribute("userId", userId))
-				.andExpect(model().attribute("client", instanceOf(ClientDto.class)));
+				.andExpect(model().attribute("client", instanceOf(ClientDTO.class)));
 	}
 
 	@Test
 	@WithMockUser(authorities = {"ADMIN", "CLIENT"})
 	void becomeClient() throws Exception {
 		UUID userId = UUID.randomUUID();
-		ClientDto clientDto = new ClientDto();
+		ClientDTO clientDto = new ClientDTO();
 
 		mockMvc.perform(post("/clients/register")
 						.param("userId", userId.toString())

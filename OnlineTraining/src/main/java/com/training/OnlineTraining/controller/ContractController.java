@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.ContractDto;
+import com.training.OnlineTraining.dto.ContractDTO;
 import com.training.OnlineTraining.service.CoachService;
 import com.training.OnlineTraining.service.ContractService;
 import jakarta.servlet.http.HttpSession;
@@ -31,7 +31,7 @@ public class ContractController {
 
 		model.addAttribute("coachId", coachId);
 		model.addAttribute("clientId", clientId);
-		model.addAttribute("contract", new ContractDto());
+		model.addAttribute("contract", new ContractDTO());
 		model.addAttribute("monthlyPrice", monthlyPrice);
 
 		return "client/contract_page";
@@ -39,7 +39,7 @@ public class ContractController {
 
 	@PostMapping("/{coachId}")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
-	public String createContract(@PathVariable UUID coachId, @ModelAttribute ContractDto contractDto, Model model) {
+	public String createContract(@PathVariable UUID coachId, @ModelAttribute ContractDTO contractDto, Model model) {
 
 		var savedContract = contractService.createContract(contractDto);
 		UUID contractId = savedContract.getId();

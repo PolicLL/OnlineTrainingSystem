@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.mapper;
 
-import com.training.OnlineTraining.dto.CoachDto;
+import com.training.OnlineTraining.dto.CoachDTO;
 import com.training.OnlineTraining.dto.UpdateCoachDTO;
 import com.training.OnlineTraining.model.Coach;
 import org.mapstruct.Mapper;
@@ -19,14 +19,14 @@ public interface CoachMapper {
 	@Mapping(source = "education", target = "education")
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "monthlyPrice", target = "monthlyPrice")
-	CoachDto coachToCoachDto(Coach coach);
+	CoachDTO coachToCoachDto(Coach coach);
 
 	@Mapping(target = "user", source = "coachUserDTO")
 	@Mapping(source = "yearsOfExperience", target = "yearsOfExperience")
 	@Mapping(source = "education", target = "education")
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "monthlyPrice", target = "monthlyPrice")
-	Coach coachDtoToCoach(CoachDto coachDto);
+	Coach coachDtoToCoach(CoachDTO coachDto);
 
 	@Mapping(target = "user.firstName", source = "updateCoachDTO.firstName")
 	@Mapping(target = "user.lastName", source = "updateCoachDTO.lastName")

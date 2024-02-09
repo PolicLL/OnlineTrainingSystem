@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.service.implementation;
 
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.mapper.UserMapper;
 import com.training.OnlineTraining.model.User;
 import com.training.OnlineTraining.repository.UserRepository;
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
 
 	@Override
-	public boolean areInputsInvalid(UserDto request) {
+	public boolean areInputsInvalid(UserDTO request) {
 
 		return ValidationUtils.isStringNullOrEmpty(request.getFirstName()) ||
 				ValidationUtils.isStringNullOrEmpty(request.getLastName()) ||
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User registerUser(UserDto request) {
+	public User registerUser(UserDTO request) {
 
 		if (areInputsInvalid(request)) {
 			throw new RuntimeException("Invalid user input");
