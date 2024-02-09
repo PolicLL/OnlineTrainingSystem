@@ -47,7 +47,7 @@ public class WorkoutController {
 
 		logger.info("Displaying create workout using template form.");
 
-		model.addAttribute("workoutTemplate", new WorkoutTemplateDTO());
+		model.addAttribute("workoutTemplateDTO", new WorkoutTemplateDTO());
 
 		return "workout/workout-template-form.html";
 	}

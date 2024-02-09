@@ -15,9 +15,9 @@ public class WorkoutSessionDTO {
 	private UUID id;
 	private UUID workoutId = null;
 	private UUID exerciseId = null;
-	private Integer numberOfReps = 0;
-	private Integer pauseAfterExerciseInSeconds = 0;
-	private BigDecimal weight = BigDecimal.valueOf(0.0);
+	private Integer numberOfReps = 10;
+	private Integer pauseAfterExerciseInSeconds = 30;
+	private BigDecimal weight = BigDecimal.valueOf(20.0);
 
 	public WorkoutSessionDTO(Workout workout) {
 		this.workoutId = workout.getId();
