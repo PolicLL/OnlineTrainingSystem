@@ -1,7 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.input.ExerciseInputDTO;
-import com.training.OnlineTraining.dto.output.ExerciseOutputDTO;
+import com.training.OnlineTraining.dto.ExerciseDTO;
 import com.training.OnlineTraining.model.enums.ExerciseDifficultyLevel;
 import com.training.OnlineTraining.model.enums.ExerciseEquipment;
 import com.training.OnlineTraining.service.ExerciseService;
@@ -55,15 +54,15 @@ class ExerciseControllerTest {
 				.andExpect(view().name("exercise/exerciseCreateForm"))
 				.andExpect(model().attribute("difficultyLevels", hasSize(ExerciseDifficultyLevel.values().length)))
 				.andExpect(model().attribute("exerciseEquipmentList", hasSize(ExerciseEquipment.values().length)))
-				.andExpect(model().attribute("exercise", instanceOf(ExerciseInputDTO.class)));
+				.andExpect(model().attribute("exercise", instanceOf(ExerciseDTO.class)));
 	}
 
 	@Test
 	@WithMockUser(authorities = {"ADMIN", "COACH"})
 	void createExercise() throws Exception {
 
-		ExerciseInputDTO inputDTO = new ExerciseInputDTO();
-		ExerciseOutputDTO outputDTO = new ExerciseOutputDTO();
+		ExerciseDTO inputDTO = new ExerciseDTO();
+		ExerciseDTO outputDTO = new ExerciseDTO();
 		when(exerciseService.createExercise(any())).thenReturn(outputDTO);
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/exercise/create")
@@ -80,7 +79,7 @@ class ExerciseControllerTest {
 	void showExerciseDetails() throws Exception {
 
 		UUID exerciseId = UUID.randomUUID();
-		ExerciseOutputDTO outputDTO = new ExerciseOutputDTO();
+		ExerciseDTO outputDTO = new ExerciseDTO();
 		when(exerciseService.getExerciseById(exerciseId)).thenReturn(outputDTO);
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/exercise/details/{id}", exerciseId))
@@ -93,8 +92,8 @@ class ExerciseControllerTest {
 	@WithMockUser(authorities = {"ADMIN", "COACH"})
 	void getAllExercises() throws Exception {
 
-		List<ExerciseOutputDTO> exercises = Arrays.asList(new ExerciseOutputDTO(), new ExerciseOutputDTO());
-		PageImpl<ExerciseOutputDTO> exercisePage = new PageImpl<>(exercises);
+		List<ExerciseDTO> exercises = Arrays.asList(new ExerciseDTO(), new ExerciseDTO());
+		PageImpl<ExerciseDTO> exercisePage = new PageImpl<>(exercises);
 
 		when(exerciseService.getAllExercisesPageable(PageRequest.of(0, 10))).thenReturn(exercisePage);
 
@@ -104,7 +103,7 @@ class ExerciseControllerTest {
 				.andExpect(model().attribute("currentPage", 1)) // Adjust index to start from 0
 				.andExpect(model().attribute("totalPages", 1));
 
-		List<ExerciseOutputDTO> content = exercisePage.getContent();
+		List<ExerciseDTO> content = exercisePage.getContent();
 		assertThat(content, hasSize(2));
 	}
 
@@ -113,7 +112,7 @@ class ExerciseControllerTest {
 	void getUpdateFormForExercise() throws Exception {
 
 		UUID exerciseId = UUID.randomUUID();
-		ExerciseOutputDTO outputDTO = new ExerciseOutputDTO();
+		ExerciseDTO outputDTO = new ExerciseDTO();
 		List<ExerciseDifficultyLevel> difficultyLevels = Arrays.asList(ExerciseDifficultyLevel.values());
 		List<ExerciseEquipment> exerciseEquipmentList = Arrays.asList(ExerciseEquipment.values());
 
@@ -131,7 +130,7 @@ class ExerciseControllerTest {
 	void updateExercise() throws Exception {
 
 		UUID exerciseId = UUID.randomUUID();
-		ExerciseInputDTO inputDTO = new ExerciseInputDTO();
+		ExerciseDTO inputDTO = new ExerciseDTO();
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/exercise/update/{id}", exerciseId)
 						.contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -139,7 +138,7 @@ class ExerciseControllerTest {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/exercise"));
 
-		verify(exerciseService, times(1)).updateExercise(eq(exerciseId), ArgumentMatchers.any(ExerciseInputDTO.class));
+		verify(exerciseService, times(1)).updateExercise(eq(exerciseId), ArgumentMatchers.any(ExerciseDTO.class));
 	}
 
 	@Test
@@ -158,7 +157,7 @@ class ExerciseControllerTest {
 	void showClientExerciseDetails() throws Exception {
 
 		UUID exerciseId = UUID.randomUUID();
-		ExerciseOutputDTO outputDTO = new ExerciseOutputDTO();
+		ExerciseDTO outputDTO = new ExerciseDTO();
 		when(exerciseService.getExerciseById(exerciseId)).thenReturn(outputDTO);
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/exercise/client-details/{id}", exerciseId))

@@ -1,7 +1,6 @@
 package com.training.OnlineTraining.service;
 
-import com.training.OnlineTraining.dto.input.ExerciseInputDTO;
-import com.training.OnlineTraining.dto.output.ExerciseOutputDTO;
+import com.training.OnlineTraining.dto.ExerciseDTO;
 import com.training.OnlineTraining.model.Exercise;
 import com.training.OnlineTraining.model.enums.WorkoutType;
 import org.springframework.data.domain.Page;
@@ -13,19 +12,19 @@ import java.util.UUID;
 
 public interface ExerciseService {
 
-	ExerciseOutputDTO createExercise(ExerciseInputDTO exerciseInputDTO);
+	ExerciseDTO createExercise(ExerciseDTO exerciseDTO);
 
-	ExerciseOutputDTO getExerciseById(UUID id);
+	ExerciseDTO getExerciseById(UUID id);
 
-	Page<ExerciseOutputDTO> getAllExercisesPageable(Pageable pageable);
+	Page<ExerciseDTO> getAllExercisesPageable(Pageable pageable);
 
-	ExerciseOutputDTO updateExercise(UUID id, ExerciseInputDTO exerciseDetails);
+	ExerciseDTO updateExercise(UUID id, ExerciseDTO exerciseDetails);
 
 	void deleteExercise(UUID id);
 
 	void deleteAll();
 
-	List<ExerciseOutputDTO> getAllExercises();
+	List<ExerciseDTO> getAllExercises();
 
 	List<Exercise> getAllExercisesForWorkoutType(WorkoutType workoutType);
 

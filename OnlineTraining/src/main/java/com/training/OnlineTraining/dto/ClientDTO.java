@@ -6,7 +6,7 @@ import java.util.UUID;
 
 
 @Data
-public class ClientDto {
+public class ClientDTO {
 
 	private UUID id;
 	private String medicalCondition;

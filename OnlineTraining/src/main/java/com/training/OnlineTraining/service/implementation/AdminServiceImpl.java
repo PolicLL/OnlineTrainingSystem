@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service.implementation;
 
-import com.training.OnlineTraining.dto.ContractDto;
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.ContractDTO;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.mapper.ContractMapper;
 import com.training.OnlineTraining.mapper.UserAdminMapper;
 import com.training.OnlineTraining.mapper.UserMapper;
@@ -32,7 +32,7 @@ public class AdminServiceImpl implements AdminService {
 	private final ContractRepository contractRepository;
 
 	@Override
-	public List<UserDto> getAllUsers() {
+	public List<UserDTO> getAllUsers() {
 
 		return userRepository.findAll().stream()
 				.map(userMapper::convertToDto)
@@ -40,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<UserDto> filterUsersByRole(String role) {
+	public List<UserDTO> filterUsersByRole(String role) {
 
 		Specification<User> spec = UserSpecifications.filterByRole(role);
 
@@ -60,7 +60,7 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public void updateUser(UUID userId, UserDto userDto) {
+	public void updateUser(UUID userId, UserDTO userDto) {
 
 		var user = userRepository.findById(userId)
 				.orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
@@ -70,7 +70,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public UserDto getUserById(UUID userId) {
+	public UserDTO getUserById(UUID userId) {
 
 		var user = userRepository.findById(userId)
 				.orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
@@ -79,25 +79,25 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<ContractDto> getAllContracts() {
+	public List<ContractDTO> getAllContracts() {
 
 		var contracts = contractRepository.findAll();
 		return contractMapper.mapToDtoList(contracts);
 	}
 
 	@Override
-	public void updateContract(UUID contractId, ContractDto updatedContractDto) {
+	public void updateContract(UUID contractId, ContractDTO updatedContractDTO) {
 
 		var existingContract = contractRepository.findById(contractId)
 				.orElseThrow(() -> new EntityNotFoundException("Contract not found with id: " + contractId));
 
-		var updatedContract = contractMapper.mapDto(updatedContractDto);
+		var updatedContract = contractMapper.mapDto(updatedContractDTO);
 
 		contractRepository.save(updatedContract);
 	}
 
 	@Override
-	public ContractDto getContractById(UUID contractId) {
+	public ContractDTO getContractById(UUID contractId) {
 
 		var contract = contractRepository.findById(contractId)
 				.orElseThrow(() -> new EntityNotFoundException("Contract not found with id: " + contractId));

@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.mapper;
 
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.User;
 import com.training.OnlineTraining.util.PasswordUtils;
 import org.mapstruct.Mapper;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-	public static User mapDtoToEntity(UserDto userDto) {
+	public static User mapDtoToEntity(UserDTO userDto) {
 
 		User user = new User();
 		user.setFirstName(userDto.getFirstName());
@@ -28,9 +28,9 @@ public class UserMapper {
 		return user;
 	}
 
-	public UserDto convertToDto(User user) {
+	public UserDTO convertToDto(User user) {
 
-		UserDto userDto = new UserDto();
+		UserDTO userDto = new UserDTO();
 		userDto.setId(user.getId());
 		userDto.setFirstName(user.getFirstName());
 		userDto.setLastName(user.getLastName());

@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.mapper;
 
-import com.training.OnlineTraining.dto.ContractDto;
+import com.training.OnlineTraining.dto.ContractDTO;
 import com.training.OnlineTraining.model.Contract;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,15 +21,15 @@ public interface ContractMapper {
 	@Mapping(target = "startDate", source = "startDate")
 	@Mapping(target = "endDate", source = "endDate")
 	@Mapping(target = "monthlyPrice", source = "monthlyPrice")
-	Contract mapDto(ContractDto contractDto);
+	Contract mapDto(ContractDTO contractDto);
 
 	@Mapping(target = "coach.id", source = "coach.id")
 	@Mapping(target = "client.id", source = "client.id")
 	@Mapping(target = "startDate", source = "startDate")
 	@Mapping(target = "endDate", source = "endDate")
 	@Mapping(target = "monthlyPrice", source = "monthlyPrice")
-	ContractDto mapToDto(Contract contract);
+	ContractDTO mapToDto(Contract contract);
 
-	List<ContractDto> mapToDtoList(List<Contract> contracts);
+	List<ContractDTO> mapToDtoList(List<Contract> contracts);
 
 }

@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service;
 
-import com.training.OnlineTraining.dto.CoachDto;
-import com.training.OnlineTraining.dto.CoachFilterParams;
+import com.training.OnlineTraining.dto.CoachDTO;
+import com.training.OnlineTraining.dto.CoachFilterParamsDTO;
 import com.training.OnlineTraining.dto.UpdateCoachDTO;
 import com.training.OnlineTraining.model.Coach;
 import com.training.OnlineTraining.model.User;
@@ -15,17 +15,17 @@ import java.util.UUID;
 
 public interface CoachService {
 
-	Coach registerCoach(CoachDto coachDto, UUID userId);
+	Coach registerCoach(CoachDTO coachDto, UUID userId);
 
 	boolean isCoach(User user);
 
-	List<CoachDto> getAllCoaches();
+	List<CoachDTO> getAllCoaches();
 
-	List<CoachDto> filterCoaches(CoachFilterParams filterParams);
+	List<CoachDTO> filterCoaches(CoachFilterParamsDTO filterParams);
 
-	Page<CoachDto> coachesWithPagination(CoachFilterParams filterParams, Pageable pageable);
+	Page<CoachDTO> coachesWithPagination(CoachFilterParamsDTO filterParams, Pageable pageable);
 
-	Specification<Coach> buildSpecification(CoachFilterParams filterParams);
+	Specification<Coach> buildSpecification(CoachFilterParamsDTO filterParams);
 
 	Double getMonthlyPriceById(UUID coachId);
 

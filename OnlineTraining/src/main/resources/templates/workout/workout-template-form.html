@@ -18,7 +18,7 @@
             <h2 class="align">Workout Template Form</h2>
         </header>
 
-<form th:action="@{/workout/create-template}" th:object="${workoutTemplate}" method="post" class="login__form">
+<form th:action="@{/workout/create-template}" th:object="${workoutTemplateDTO}" method="post" class="login__form">
     <label for="workoutType">Workout Type:</label>
     <select id="workoutType" th:field="*{workoutType}">
         <option th:each="type : ${T(com.training.OnlineTraining.model.enums.WorkoutType).values()}" th:value="${type}" th:text="${type}"></option>

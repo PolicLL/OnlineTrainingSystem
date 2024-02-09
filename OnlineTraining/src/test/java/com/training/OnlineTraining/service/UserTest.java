@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service;
 
 import com.training.OnlineTraining.OnlineTrainingApplication;
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.User;
 import com.training.OnlineTraining.utils.TestDTOUtils;
 import org.flywaydb.test.FlywayTestExecutionListener;
@@ -26,7 +26,7 @@ public class UserTest {
 	@Autowired
 	private UserService userService;
 
-	private UserDto userDto;
+	private UserDTO userDto;
 
 	private int numberOfUsersInDatabaseBeforeTest = 0;
 

@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.CoachDto;
+import com.training.OnlineTraining.dto.CoachDTO;
 import com.training.OnlineTraining.dto.UpdateCoachDTO;
 import com.training.OnlineTraining.model.Coach;
 import com.training.OnlineTraining.model.User;
@@ -51,14 +51,14 @@ public class CoachControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(view().name("coach/coach_register_page"))
 				.andExpect(model().attribute("userId", userId))
-				.andExpect(model().attribute("coach", instanceOf(CoachDto.class)));
+				.andExpect(model().attribute("coach", instanceOf(CoachDTO.class)));
 	}
 
 	@Test
 	@WithMockUser(authorities = {"ADMIN", "COACH"})
 	void becomeCoach() throws Exception {
 		UUID userId = UUID.randomUUID();
-		CoachDto coachDto = new CoachDto(); // Add necessary attributes for the coach DTO
+		CoachDTO coachDto = new CoachDTO(); // Add necessary attributes for the coach DTO
 		mockMvc.perform(post("/coaches/register")
 						.param("userId", userId.toString())
 						.flashAttr("coachDto", coachDto))

@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.User;
 import com.training.OnlineTraining.service.MailService;
 import com.training.OnlineTraining.service.UserService;
@@ -33,7 +33,7 @@ public class UserController {
 	@GetMapping("/register")
 	public String getRegisterPage(Model model) {
 
-		model.addAttribute("registerRequest", new UserDto());
+		model.addAttribute("registerRequest", new UserDTO());
 		logger.info("Displaying register page.");
 
 		return "registration/register_page";
@@ -53,13 +53,13 @@ public class UserController {
 	@GetMapping("/login")
 	public String getLoginPage(Model model) {
 
-		model.addAttribute("loginRequest", new UserDto());
+		model.addAttribute("loginRequest", new UserDTO());
 		return "auth/login_page";
 	}
 
 
 	@PostMapping("/register")
-	public String register(@ModelAttribute UserDto request, @RequestParam String confirmPassword, Model model) {
+	public String register(@ModelAttribute UserDTO request, @RequestParam String confirmPassword, Model model) {
 
 		try {
 			if (!request.getPassword().equals(confirmPassword)) {

@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.mapper;
 
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,13 +16,13 @@ public interface UserAdminMapper {
 	UserAdminMapper INSTANCE = Mappers.getMapper(UserAdminMapper.class);
 
 	@Mapping(target = "password", ignore = true)
-	User mapDtoToEntity(UserDto userDto);
+	User mapDtoToEntity(UserDTO userDto);
 
-	UserDto convertToDto(User user);
+	UserDTO convertToDto(User user);
 
 	@Mapping(target = "password", ignore = true)
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "role", ignore = true)
-	void updateEntityFromDto(UserDto userDto, @MappingTarget User user);
+	void updateEntityFromDto(UserDTO userDto, @MappingTarget User user);
 
 }

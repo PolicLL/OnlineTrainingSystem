@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.service;
 
-import com.training.OnlineTraining.dto.ContractDto;
+import com.training.OnlineTraining.dto.ContractDTO;
 import com.training.OnlineTraining.model.Contract;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface ContractService {
 
-	Contract createContract(ContractDto contractDto);
+	Contract createContract(ContractDTO contractDto);
 
 	public List<Contract> getContractsByClientId(UUID clientId);
 
@@ -18,7 +18,7 @@ public interface ContractService {
 
 	List<Contract> getAllContracts();
 
-	Contract updateContract(UUID id, ContractDto contractDetails);
+	Contract updateContract(UUID id, ContractDTO contractDetails);
 
 	void deleteContract(UUID id);
 

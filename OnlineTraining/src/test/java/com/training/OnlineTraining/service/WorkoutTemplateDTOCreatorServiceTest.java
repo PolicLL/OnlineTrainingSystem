@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service;
 
 import com.training.OnlineTraining.OnlineTrainingApplication;
-import com.training.OnlineTraining.dto.WorkoutTemplate;
+import com.training.OnlineTraining.dto.WorkoutTemplateDTO;
 import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
 import com.training.OnlineTraining.model.enums.WorkoutGoal;
 import com.training.OnlineTraining.model.enums.WorkoutType;
@@ -22,7 +22,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 		DependencyInjectionTestExecutionListener.class,
 		FlywayTestExecutionListener.class
 })
-public class WorkoutTemplateCreatorServiceTest {
+public class WorkoutTemplateDTOCreatorServiceTest {
 
 	@Autowired
 	private WorkoutTemplateCreatorService workoutTemplateCreatorService;
@@ -30,8 +30,8 @@ public class WorkoutTemplateCreatorServiceTest {
 	@Test
 	public void test(){
 
-		WorkoutTemplate workoutTemplate = new WorkoutTemplate(WorkoutType.LEGS, WorkoutGoal.ENDURANCE, 0, WorkoutType.CORE);
-		WorkoutInputDTO workout = workoutTemplateCreatorService.createWorkoutInputDTO(workoutTemplate);
+		WorkoutTemplateDTO workoutTemplateDTO = new WorkoutTemplateDTO(WorkoutType.LEGS, WorkoutGoal.ENDURANCE, 0, WorkoutType.CORE);
+		WorkoutInputDTO workout = workoutTemplateCreatorService.createWorkoutInputDTO(workoutTemplateDTO);
 
 		System.out.println(workout);
 

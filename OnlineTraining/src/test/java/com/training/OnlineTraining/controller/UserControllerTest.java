@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.User;
 import com.training.OnlineTraining.service.MailService;
 import com.training.OnlineTraining.service.UserService;
@@ -72,7 +72,7 @@ class UserControllerTest {
 
 	@Test
 	void registerSuccess() throws Exception {
-		UserDto request = new UserDto();
+		UserDTO request = new UserDTO();
 		request.setEmail("test@example.com");
 		request.setPassword("password");
 
@@ -94,7 +94,7 @@ class UserControllerTest {
 
 	@Test
 	void registerPasswordMismatch() throws Exception {
-		UserDto request = new UserDto();
+		UserDTO request = new UserDTO();
 		request.setPassword("password");
 
 		ResultActions result = mockMvc.perform(post("/register")
@@ -111,7 +111,7 @@ class UserControllerTest {
 
 	@Test
 	void registerException() throws Exception {
-		UserDto request = new UserDto();
+		UserDTO request = new UserDTO();
 		request.setPassword("password");
 
 		when(userService.registerUser(request)).thenThrow(new RuntimeException("Registration error"));

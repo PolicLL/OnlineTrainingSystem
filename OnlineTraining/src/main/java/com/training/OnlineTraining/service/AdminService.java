@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service;
 
-import com.training.OnlineTraining.dto.ContractDto;
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.ContractDTO;
+import com.training.OnlineTraining.dto.UserDTO;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,21 +9,21 @@ import java.util.UUID;
 
 public interface AdminService {
 
-	List<UserDto> getAllUsers();
+	List<UserDTO> getAllUsers();
 
-	List<UserDto> filterUsersByRole(String role);
+	List<UserDTO> filterUsersByRole(String role);
 
 	void deleteUser(UUID userId);
 
-	void updateUser(UUID userId, UserDto userDto);
+	void updateUser(UUID userId, UserDTO userDto);
 
-	UserDto getUserById(UUID userId);
+	UserDTO getUserById(UUID userId);
 
-	List<ContractDto> getAllContracts();
+	List<ContractDTO> getAllContracts();
 
-	void updateContract(UUID contractId, ContractDto updatedContractDto);
+	void updateContract(UUID contractId, ContractDTO updatedContractDTO);
 
-	ContractDto getContractById(UUID contractId);
+	ContractDTO getContractById(UUID contractId);
 
 	void deleteContract(UUID contractId);
 

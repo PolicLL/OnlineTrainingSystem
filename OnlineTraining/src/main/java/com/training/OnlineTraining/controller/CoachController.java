@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.CoachDto;
+import com.training.OnlineTraining.dto.CoachDTO;
 import com.training.OnlineTraining.dto.UpdateCoachDTO;
 import com.training.OnlineTraining.service.CoachService;
 import com.training.OnlineTraining.service.ContractService;
@@ -50,13 +50,13 @@ public class CoachController {
 		logger.info("Fetching become coach page.");
 
 		model.addAttribute("userId", userId);
-		model.addAttribute("coach", new CoachDto());
+		model.addAttribute("coach", new CoachDTO());
 
 		return "coach/coach_register_page";
 	}
 
 	@PostMapping("/register")
-	public String becomeCoach(@ModelAttribute CoachDto coachDto, @RequestParam UUID userId, Model model) {
+	public String becomeCoach(@ModelAttribute CoachDTO coachDto, @RequestParam UUID userId, Model model) {
 
 		logger.info("Attempting to become a coach.");
 

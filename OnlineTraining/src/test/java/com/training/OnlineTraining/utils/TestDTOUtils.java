@@ -62,8 +62,8 @@ public class TestDTOUtils {
 		return measurementDTO;
 	}
 
-	public static UserDto getUserDTO() {
-		UserDto userDto = new UserDto();
+	public static UserDTO getUserDTO() {
+		UserDTO userDto = new UserDTO();
 
 		userDto.setFirstName("FirstName" + userNumber);
 		userDto.setLastName("LastName" + userNumber);
@@ -105,8 +105,8 @@ public class TestDTOUtils {
 		return new Random().nextDouble(1000.0);
 	}
 
-	public static ClientDto getClientDTO() {
-		ClientDto clientDto = new ClientDto();
+	public static ClientDTO getClientDTO() {
+		ClientDTO clientDto = new ClientDTO();
 
 		clientDto.setMedicalCondition("Medical condition " + clientNumber);
 		clientDto.setInjuries("Injuries " + clientNumber);
@@ -115,8 +115,8 @@ public class TestDTOUtils {
 		return clientDto;
 	}
 
-	public static CoachDto getCoachDTO() {
-		CoachDto coachDto = new CoachDto();
+	public static CoachDTO getCoachDTO() {
+		CoachDTO coachDto = new CoachDTO();
 		
 		coachDto.setCoachUserDTO(null);
 		coachDto.setYearsOfExperience(10.0);
@@ -145,8 +145,8 @@ public class TestDTOUtils {
 		return updateCoachDTO;
 	}
 
-	public static ContractDto getContractDTO(Coach coach, Client client) {
-		ContractDto contractDto = new ContractDto();
+	public static ContractDTO getContractDTO(Coach coach, Client client) {
+		ContractDTO contractDto = new ContractDTO();
 
 		contractDto.setClient(client);
 		contractDto.setCoach(coach);

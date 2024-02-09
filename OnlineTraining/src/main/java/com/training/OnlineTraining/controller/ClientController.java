@@ -1,8 +1,8 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.ClientDto;
-import com.training.OnlineTraining.dto.CoachDto;
-import com.training.OnlineTraining.dto.CoachFilterParams;
+import com.training.OnlineTraining.dto.ClientDTO;
+import com.training.OnlineTraining.dto.CoachDTO;
+import com.training.OnlineTraining.dto.CoachFilterParamsDTO;
 import com.training.OnlineTraining.dto.UpdateClientDTO;
 import com.training.OnlineTraining.service.ClientService;
 import com.training.OnlineTraining.service.CoachService;
@@ -36,12 +36,12 @@ public class ClientController {
 	@GetMapping("/client-page")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
 	public String getClientPage(Model model,
-	                            @ModelAttribute CoachFilterParams filterParams,
+	                            @ModelAttribute CoachFilterParamsDTO filterParams,
 	                            @RequestParam(defaultValue = "1") int page,
 	                            @RequestParam(defaultValue = "10") int size) {
 
 
-		List<CoachDto> filteredCoaches;
+		List<CoachDTO> filteredCoaches;
 		if (filterParams.isNotEmpty()) {
 			filteredCoaches = coachService.filterCoaches(filterParams);
 			logger.debug("Filtered coaches based on filter parameters.");
@@ -63,12 +63,12 @@ public class ClientController {
 	public String getBecomeClientPage(@RequestParam UUID userId, Model model) {
 
 		model.addAttribute("userId", userId);
-		model.addAttribute("client", new ClientDto());
+		model.addAttribute("client", new ClientDTO());
 		return "client/client_register_page";
 	}
 
 	@PostMapping("/register")
-	public String becomeClient(@ModelAttribute ClientDto clientDto, @RequestParam UUID userId, Model model) {
+	public String becomeClient(@ModelAttribute ClientDTO clientDto, @RequestParam UUID userId, Model model) {
 
 		try {
 			clientService.registerClient(clientDto, userId);

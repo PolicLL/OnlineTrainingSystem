@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service;
 
 
-import com.training.OnlineTraining.dto.ClientDto;
+import com.training.OnlineTraining.dto.ClientDTO;
 import com.training.OnlineTraining.dto.UpdateClientDTO;
 import com.training.OnlineTraining.model.Client;
 import com.training.OnlineTraining.model.User;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface ClientService {
 
-	Client registerClient(ClientDto clientDto, UUID userId);
+	Client registerClient(ClientDTO clientDto, UUID userId);
 
 	boolean isClient(User user);
 

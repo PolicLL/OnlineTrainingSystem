@@ -13,7 +13,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContractDto {
+public class ContractDTO {
 
 	private UUID id;
 	private Coach coach;

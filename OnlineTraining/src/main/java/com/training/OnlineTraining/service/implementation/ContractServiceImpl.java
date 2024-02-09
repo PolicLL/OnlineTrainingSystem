@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.service.implementation;
 
-import com.training.OnlineTraining.dto.ContractDto;
+import com.training.OnlineTraining.dto.ContractDTO;
 import com.training.OnlineTraining.exceptions.ContractNotFoundException;
 import com.training.OnlineTraining.mapper.ContractMapper;
 import com.training.OnlineTraining.model.Contract;
@@ -22,7 +22,7 @@ public class ContractServiceImpl implements ContractService {
 	private final ContractMapper contractMapper;
 
 	@Override
-	public Contract createContract(ContractDto contractDto) {
+	public Contract createContract(ContractDTO contractDto) {
 
 		var contract = contractMapper.mapDto(contractDto);
 		return contractRepository.save(contract);
@@ -48,7 +48,7 @@ public class ContractServiceImpl implements ContractService {
 	}
 
 	@Override
-	public Contract updateContract(UUID id, ContractDto contractDetails) {
+	public Contract updateContract(UUID id, ContractDTO contractDetails) {
 
 		return contractRepository.findById(id)
 				.map(contract -> {

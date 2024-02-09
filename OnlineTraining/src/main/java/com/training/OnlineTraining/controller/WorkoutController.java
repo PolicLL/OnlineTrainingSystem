@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.WorkoutTemplate;
+import com.training.OnlineTraining.dto.WorkoutTemplateDTO;
 import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
 import com.training.OnlineTraining.dto.output.WorkoutOutputDTO;
 import com.training.OnlineTraining.model.enums.WorkoutStatus;
@@ -48,19 +48,19 @@ public class WorkoutController {
 
 		logger.info("Displaying create workout using template form.");
 
-		model.addAttribute("workoutTemplate", new WorkoutTemplate());
+		model.addAttribute("workoutTemplate", new WorkoutTemplateDTO());
 
 		return "workout/workout-template-form.html";
 	}
 
 	@PostMapping("/create-template")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'COACH')")
-	public String createWorkoutUsingTemplateForm(@ModelAttribute("workoutTemplate") WorkoutTemplate workoutTemplate, HttpSession session) {
+	public String createWorkoutUsingTemplateForm(@ModelAttribute("workoutTemplate") WorkoutTemplateDTO workoutTemplateDTO, HttpSession session) {
 
 		logger.info("Displaying create workout using template form.");
 
 		UUID contractID = (UUID) session.getAttribute("contractID");
-		var workoutInputDTO = workoutTemplateCreatorService.createWorkoutInputDTO(workoutTemplate);
+		var workoutInputDTO = workoutTemplateCreatorService.createWorkoutInputDTO(workoutTemplateDTO);
 		workoutService.createWorkoutUsingTemplate(workoutInputDTO, contractID);
 
 		return "redirect:/workout";

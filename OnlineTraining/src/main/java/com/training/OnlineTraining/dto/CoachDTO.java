@@ -7,7 +7,7 @@ import java.util.UUID;
 
 
 @Data
-public class CoachDto {
+public class CoachDTO {
 
 	private UUID id;
 	private CoachUserDTO coachUserDTO;

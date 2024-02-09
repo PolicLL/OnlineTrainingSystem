@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.ContractDto;
-import com.training.OnlineTraining.dto.UserDto;
+import com.training.OnlineTraining.dto.ContractDTO;
+import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.enums.Role;
 import com.training.OnlineTraining.service.AdminService;
 import com.training.OnlineTraining.service.WorkoutService;
@@ -37,7 +37,7 @@ public class AdminController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String getAllUsers(@RequestParam(name = "roleFilter", required = false) String roleFilter, Model model) {
 
-		List<UserDto> users = StringUtils.isEmpty(roleFilter) ? adminService.getAllUsers() :
+		List<UserDTO> users = StringUtils.isEmpty(roleFilter) ? adminService.getAllUsers() :
 				adminService.filterUsersByRole(String.valueOf(Role.valueOf(roleFilter)));
 
 		model.addAttribute("users", users);
@@ -64,7 +64,7 @@ public class AdminController {
 
 	@PostMapping("/users/update")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String updateUser(@ModelAttribute("user") UserDto userDto) {
+	public String updateUser(@ModelAttribute("user") UserDTO userDto) {
 
 		adminService.updateUser(userDto.getId(), userDto);
 		return "redirect:/admins/users";
@@ -74,7 +74,7 @@ public class AdminController {
 	@GetMapping("/contracts")
 	public String getAllContracts(Model model, HttpSession session) {
 
-		List<ContractDto> contracts = adminService.getAllContracts();
+		List<ContractDTO> contracts = adminService.getAllContracts();
 		model.addAttribute("contracts", contracts);
 		session.removeAttribute("contractID");
 		return "admin/contracts_page";
@@ -84,7 +84,7 @@ public class AdminController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String getUpdateContractPage(@PathVariable UUID contractId, Model model) {
 
-		ContractDto contract = adminService.getContractById(contractId);
+		ContractDTO contract = adminService.getContractById(contractId);
 		model.addAttribute("contract", contract);
 		model.addAttribute("coachId", contract.getCoach().getId());
 		model.addAttribute("clientId", contract.getClient().getId());
@@ -93,7 +93,7 @@ public class AdminController {
 
 	@PostMapping("/contracts/update")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String updateContract(@ModelAttribute("contract") ContractDto contractDto) {
+	public String updateContract(@ModelAttribute("contract") ContractDTO contractDto) {
 
 		adminService.updateContract(contractDto.getId(), contractDto);
 		return "redirect:/admins/contracts";
