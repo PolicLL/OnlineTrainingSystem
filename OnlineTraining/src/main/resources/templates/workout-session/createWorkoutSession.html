@@ -17,7 +17,7 @@
         <header class="login__header">
             <h2 class="align">Create Workout Session</h2>
         </header>
-<form th:action="@{/workoutSession/create}" th:object="${workoutSessionInputDTO}" method="post" class="login__form">
+<form th:action="@{/workoutSession/create}" th:object="${workoutSessionDTO}" method="post" class="login__form">
 
     <input type="hidden" th:field="*{workoutId}">
 

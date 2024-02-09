@@ -17,7 +17,7 @@
         <header class="login__header">
             <h2 class="align">Create Workout</h2>
         </header>
-<form th:action="@{/workout/create}" th:object="${workoutInputDTO}" method="post" class="login__form">
+<form th:action="@{/workout/create}" th:object="${workoutDTO}" method="post" class="login__form">
     <!--
     <label>Date of Workout:</label>
     <input type="date" th:field="*{dateOfWorkout}" pattern="yyyy-MM-dd" required><br>

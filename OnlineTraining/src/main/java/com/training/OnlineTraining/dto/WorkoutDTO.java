@@ -1,4 +1,4 @@
-package com.training.OnlineTraining.dto.input;
+package com.training.OnlineTraining.dto;
 
 import com.training.OnlineTraining.model.WorkoutSession;
 import com.training.OnlineTraining.model.enums.WorkoutStatus;
@@ -16,7 +16,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WorkoutInputDTO {
+public class WorkoutDTO {
+
+	private UUID id;
 
 	private UUID contractId;
 
@@ -36,7 +38,7 @@ public class WorkoutInputDTO {
 
 	private WorkoutType nextWorkout;
 
-	public WorkoutInputDTO(Integer numberOfExercises, Integer warmingUpTimeInSeconds, Integer numberOfSets, Integer pauseBetweenSetsInSeconds, List<WorkoutSession> workoutSessions) {
+	public WorkoutDTO(Integer numberOfExercises, Integer warmingUpTimeInSeconds, Integer numberOfSets, Integer pauseBetweenSetsInSeconds, List<WorkoutSession> workoutSessions) {
 
 		this.numberOfExercises = numberOfExercises;
 		this.warmingUpTimeInSeconds = warmingUpTimeInSeconds;
@@ -45,7 +47,7 @@ public class WorkoutInputDTO {
 		this.workoutSessions = workoutSessions;
 	}
 
-	public WorkoutInputDTO(UUID contractId) {
+	public WorkoutDTO(UUID contractId) {
 
 		this.contractId = contractId;
 	}

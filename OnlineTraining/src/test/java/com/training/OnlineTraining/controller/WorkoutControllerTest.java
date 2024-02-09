@@ -1,7 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
-import com.training.OnlineTraining.dto.output.WorkoutOutputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
 import com.training.OnlineTraining.model.enums.WorkoutStatus;
 import com.training.OnlineTraining.service.WorkoutService;
 import org.junit.jupiter.api.Test;
@@ -45,14 +44,14 @@ public class WorkoutControllerTest {
 		mockMvc.perform(get("/workout/create"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("workout/createWorkout"))
-				.andExpect(model().attributeExists("workoutInputDTO"));
+				.andExpect(model().attributeExists("workoutDTO"));
 	}
 
 	@Test
 	@WithMockUser(authorities = {"ADMIN", "COACH"})
 	void createWorkout() throws Exception {
 		UUID contractId = UUID.randomUUID();
-		WorkoutInputDTO inputDTO = new WorkoutInputDTO();
+		WorkoutDTO inputDTO = new WorkoutDTO();
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("contractID", contractId);
 
@@ -76,7 +75,7 @@ public class WorkoutControllerTest {
 		UUID clientId = UUID.randomUUID();
 		session.setAttribute("clientId", clientId);
 
-		List<WorkoutOutputDTO> workouts = Arrays.asList(new WorkoutOutputDTO(), new WorkoutOutputDTO());
+		List<WorkoutDTO> workouts = Arrays.asList(new WorkoutDTO(), new WorkoutDTO());
 		when(workoutService.getWorkoutsByContractID(contractId)).thenReturn(workouts);
 
 		mockMvc.perform(get("/workout").session(session))
@@ -90,7 +89,7 @@ public class WorkoutControllerTest {
 	@WithMockUser(authorities = {"ADMIN", "COACH", "CLIENT"})
 	void showWorkoutDetails() throws Exception {
 		UUID workoutId = UUID.randomUUID();
-		WorkoutOutputDTO workout = new WorkoutOutputDTO();
+		WorkoutDTO workout = new WorkoutDTO();
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("clientId", UUID.randomUUID());
 
@@ -108,7 +107,7 @@ public class WorkoutControllerTest {
 	@WithMockUser(authorities = {"ADMIN", "COACH", "CLIENT"})
 	void showUpdateWorkoutForm() throws Exception {
 		UUID workoutId = UUID.randomUUID();
-		WorkoutOutputDTO workout = new WorkoutOutputDTO();
+		WorkoutDTO workout = new WorkoutDTO();
 		List<WorkoutStatus> workoutStatuses = Arrays.asList(WorkoutStatus.values());
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("clientId", UUID.randomUUID());
@@ -127,7 +126,7 @@ public class WorkoutControllerTest {
 	@WithMockUser(authorities = {"ADMIN", "COACH"})
 	void updateWorkout() throws Exception {
 		UUID workoutId = UUID.randomUUID();
-		WorkoutInputDTO inputDTO = new WorkoutInputDTO();
+		WorkoutDTO inputDTO = new WorkoutDTO();
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("contractID", UUID.randomUUID());
 

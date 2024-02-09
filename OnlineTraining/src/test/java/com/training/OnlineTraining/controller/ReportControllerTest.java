@@ -1,6 +1,6 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.output.WorkoutOutputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
 import com.training.OnlineTraining.service.WorkoutService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,8 +32,8 @@ class ReportControllerTest {
 	@Test
 	void showPdf() throws Exception {
 		UUID workoutId = UUID.randomUUID();
-		WorkoutOutputDTO workoutOutputDTO = new WorkoutOutputDTO();
-		when(workoutService.getWorkoutById(any(UUID.class))).thenReturn(workoutOutputDTO);
+		WorkoutDTO workoutDTO = new WorkoutDTO();
+		when(workoutService.getWorkoutById(any(UUID.class))).thenReturn(workoutDTO);
 
 		this.mockMvc = MockMvcBuilders.standaloneSetup(reportController).build();
 
@@ -42,7 +42,7 @@ class ReportControllerTest {
 						.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(view().name("report/workout_pdf_template"))
-				.andExpect(model().attribute("workout", workoutOutputDTO));
+				.andExpect(model().attribute("workout", workoutDTO));
 	}
 
 }

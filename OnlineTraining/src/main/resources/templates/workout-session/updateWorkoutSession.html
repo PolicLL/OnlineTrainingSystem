@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Update Workout Session</h2>
-<form th:action="@{/workoutSession/update/{id}(id=${workoutSession.id})}" th:object="${workoutSessionInputDTO}" method="post">
+<form th:action="@{/workoutSession/update/{id}(id=${workoutSession.id})}" th:object="${workoutSessionDTO}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <label>Workout ID:</label>
     <input type="text" th:field="*{workoutId}" /><br/>

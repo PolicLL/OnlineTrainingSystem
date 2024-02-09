@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.controller;
 
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
-import com.training.OnlineTraining.dto.input.WorkoutSessionInputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
+import com.training.OnlineTraining.dto.WorkoutSessionDTO;
 import com.training.OnlineTraining.service.ExerciseService;
 import com.training.OnlineTraining.service.WorkoutSessionService;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ class WorkoutSessionControllerTest {
 						.param("workoutID", workoutId.toString()))
 				.andExpect(status().isOk())
 				.andExpect(view().name("workout-session/createWorkoutSession"))
-				.andExpect(model().attributeExists("workoutSessionInputDTO", "listExercises"));
+				.andExpect(model().attributeExists("workoutSessionDTO", "listExercises"));
 
 		verify(exerciseService, times(1)).getAllExercises();
 	}
@@ -56,7 +56,7 @@ class WorkoutSessionControllerTest {
 	@WithMockUser(authorities = {"ADMIN", "COACH"})
 	void createWorkout() throws Exception {
 		UUID workoutId = UUID.randomUUID();
-		WorkoutSessionInputDTO inputDTO = new WorkoutSessionInputDTO(workoutId);
+		WorkoutSessionDTO inputDTO = new WorkoutSessionDTO(workoutId);
 
 		mockMvc.perform(post("/workoutSession/create")
 						.contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -71,7 +71,7 @@ class WorkoutSessionControllerTest {
 	@WithMockUser(authorities = {"ADMIN", "COACH"})
 	void updateWorkoutAndSessions() throws Exception {
 		UUID workoutId = UUID.randomUUID();
-		WorkoutInputDTO inputDTO = new WorkoutInputDTO(workoutId);
+		WorkoutDTO inputDTO = new WorkoutDTO(workoutId);
 
 
 
