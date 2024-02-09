@@ -2,7 +2,7 @@ package com.training.OnlineTraining.service;
 
 import com.training.OnlineTraining.OnlineTrainingApplication;
 import com.training.OnlineTraining.dto.WorkoutTemplateDTO;
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
 import com.training.OnlineTraining.model.enums.WorkoutGoal;
 import com.training.OnlineTraining.model.enums.WorkoutType;
 import org.flywaydb.test.FlywayTestExecutionListener;
@@ -31,7 +31,7 @@ public class WorkoutTemplateDTOCreatorServiceTest {
 	public void test(){
 
 		WorkoutTemplateDTO workoutTemplateDTO = new WorkoutTemplateDTO(WorkoutType.LEGS, WorkoutGoal.ENDURANCE, 0, WorkoutType.CORE);
-		WorkoutInputDTO workout = workoutTemplateCreatorService.createWorkoutInputDTO(workoutTemplateDTO);
+		WorkoutDTO workout = workoutTemplateCreatorService.createWorkoutInputDTO(workoutTemplateDTO);
 
 		System.out.println(workout);
 

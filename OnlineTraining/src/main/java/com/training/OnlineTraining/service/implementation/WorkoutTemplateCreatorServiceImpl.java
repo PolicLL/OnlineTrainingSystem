@@ -1,7 +1,7 @@
 package com.training.OnlineTraining.service.implementation;
 
 import com.training.OnlineTraining.dto.WorkoutTemplateDTO;
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
 import com.training.OnlineTraining.model.Exercise;
 import com.training.OnlineTraining.model.WorkoutSession;
 import com.training.OnlineTraining.model.enums.WorkoutGoal;
@@ -29,11 +29,11 @@ public class WorkoutTemplateCreatorServiceImpl implements WorkoutTemplateCreator
 	private final ExerciseService exerciseService;
 
 	@Override
-	public WorkoutInputDTO createWorkoutInputDTO(WorkoutTemplateDTO workoutTemplateDTO) {
+	public WorkoutDTO createWorkoutInputDTO(WorkoutTemplateDTO workoutTemplateDTO) {
 
 		logger.info("Creating workout from template: {}", workoutTemplateDTO);
 
-		return WorkoutInputDTO.builder()
+		return WorkoutDTO.builder()
 				.numberOfExercises(workoutTemplateDTO.getNumberOfExercises())
 				.warmingUpTimeInSeconds(300)
 				.workoutStatus(WorkoutStatus.WAITING)

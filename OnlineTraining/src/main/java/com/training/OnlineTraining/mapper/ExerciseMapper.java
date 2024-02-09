@@ -1,7 +1,6 @@
 package com.training.OnlineTraining.mapper;
 
 import com.training.OnlineTraining.dto.ExerciseDTO;
-import com.training.OnlineTraining.dto.output.ExerciseOutputDTO;
 import com.training.OnlineTraining.model.Exercise;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -17,7 +16,5 @@ public interface ExerciseMapper {
 	Exercise toExercise(ExerciseDTO exerciseDTO);
 
 	ExerciseDTO toExerciseDTO(Exercise exercise);
-
-	ExerciseOutputDTO toExerciseOutputDTO(Exercise exercise);
 
 }

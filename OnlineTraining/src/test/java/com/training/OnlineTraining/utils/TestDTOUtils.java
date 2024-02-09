@@ -1,8 +1,8 @@
 package com.training.OnlineTraining.utils;
 
 import com.training.OnlineTraining.dto.*;
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
-import com.training.OnlineTraining.dto.input.WorkoutSessionInputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
+import com.training.OnlineTraining.dto.WorkoutSessionDTO;
 import com.training.OnlineTraining.model.Client;
 import com.training.OnlineTraining.model.Coach;
 import com.training.OnlineTraining.model.enums.Education;
@@ -15,35 +15,35 @@ import java.util.UUID;
 
 public class TestDTOUtils {
 
-	public static WorkoutInputDTO getWorkoutDTO(UUID contractID){
-		WorkoutInputDTO workoutInputDTO = new WorkoutInputDTO();
+	public static WorkoutDTO getWorkoutDTO(UUID contractID){
+		WorkoutDTO workoutDTO = new WorkoutDTO();
 
-		workoutInputDTO.setDateOfWorkout(DateUtils.getTodayDate());
-		workoutInputDTO.setContractId(contractID);
+		workoutDTO.setDateOfWorkout(DateUtils.getTodayDate());
+		workoutDTO.setContractId(contractID);
 
-		workoutInputDTO.setOrdinalNumberOfWorkout(getRandomNumber());
-		workoutInputDTO.setNumberOfExercises(getRandomNumber());
-		workoutInputDTO.setWarmingUpTimeInSeconds(getRandomNumber());
-		workoutInputDTO.setNumberOfSets(getRandomNumber());
-		workoutInputDTO.setPauseBetweenSetsInSeconds(getRandomNumber());
-		workoutInputDTO.setSelfRating(getRandomNumber());
-		workoutInputDTO.setWorkoutStatus(WorkoutStatus.WAITING);
-		workoutInputDTO.setNextWorkout(WorkoutType.PUSH);
+		workoutDTO.setOrdinalNumberOfWorkout(getRandomNumber());
+		workoutDTO.setNumberOfExercises(getRandomNumber());
+		workoutDTO.setWarmingUpTimeInSeconds(getRandomNumber());
+		workoutDTO.setNumberOfSets(getRandomNumber());
+		workoutDTO.setPauseBetweenSetsInSeconds(getRandomNumber());
+		workoutDTO.setSelfRating(getRandomNumber());
+		workoutDTO.setWorkoutStatus(WorkoutStatus.WAITING);
+		workoutDTO.setNextWorkout(WorkoutType.PUSH);
 
-		return workoutInputDTO;
+		return workoutDTO;
 	}
 
-	public static WorkoutSessionInputDTO getWorkoutSessionDTO(UUID workoutId, UUID exerciseId){
-		WorkoutSessionInputDTO workoutSessionInputDTO = new WorkoutSessionInputDTO(workoutId);
+	public static WorkoutSessionDTO getWorkoutSessionDTO(UUID workoutId, UUID exerciseId){
+		WorkoutSessionDTO workoutSessionDTO = new WorkoutSessionDTO(workoutId);
 
-		workoutSessionInputDTO.setWorkoutId(workoutId);
-		workoutSessionInputDTO.setExerciseId(exerciseId);
+		workoutSessionDTO.setWorkoutId(workoutId);
+		workoutSessionDTO.setExerciseId(exerciseId);
 
-		workoutSessionInputDTO.setNumberOfReps(getRandomNumber());
-		workoutSessionInputDTO.setPauseAfterExerciseInSeconds(getRandomNumber());
-		workoutSessionInputDTO.setWeight(BigDecimal.valueOf(getRandomDecimalNumber()));
+		workoutSessionDTO.setNumberOfReps(getRandomNumber());
+		workoutSessionDTO.setPauseAfterExerciseInSeconds(getRandomNumber());
+		workoutSessionDTO.setWeight(BigDecimal.valueOf(getRandomDecimalNumber()));
 
-		return workoutSessionInputDTO;
+		return workoutSessionDTO;
 	}
 
 	private static int userNumber = 0;

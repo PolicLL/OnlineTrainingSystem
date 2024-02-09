@@ -1,7 +1,6 @@
 package com.training.OnlineTraining.service;
 
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
-import com.training.OnlineTraining.dto.output.WorkoutOutputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,24 +8,24 @@ import java.util.UUID;
 
 public interface WorkoutService {
 
-	WorkoutOutputDTO createEmptyWorkout(WorkoutInputDTO workoutInputDTO, UUID contractID);
+	WorkoutDTO createEmptyWorkout(WorkoutDTO workoutDTO, UUID contractID);
 
-	WorkoutOutputDTO getWorkoutById(UUID id);
+	WorkoutDTO getWorkoutById(UUID id);
 
-	List<WorkoutOutputDTO> getAllWorkouts();
+	List<WorkoutDTO> getAllWorkouts();
 
-	WorkoutOutputDTO updateWorkout(UUID id, WorkoutInputDTO workoutDetails);
+	WorkoutDTO updateWorkout(UUID id, WorkoutDTO workoutDetails);
 
 	void incrementNumberOfExercises(UUID workoutID);
 
 	void decrementNumberOfExercises(UUID workoutID);
 
-	void updateWorkout(UUID id, WorkoutInputDTO workoutDetails, UUID contractID);
+	void updateWorkout(UUID id, WorkoutDTO workoutDetails, UUID contractID);
 
 	void deleteWorkout(UUID id);
 
-	List<WorkoutOutputDTO> getWorkoutsByContractID(UUID contractID);
+	List<WorkoutDTO> getWorkoutsByContractID(UUID contractID);
 
-	WorkoutOutputDTO createWorkoutUsingTemplate(WorkoutInputDTO workoutInputDTO, UUID contractID);
+	WorkoutDTO createWorkoutUsingTemplate(WorkoutDTO workoutDTO, UUID contractID);
 
 }

@@ -2,7 +2,7 @@ package com.training.OnlineTraining.service.implementation;
 
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
-import com.training.OnlineTraining.dto.output.WorkoutOutputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
 import com.training.OnlineTraining.service.ReportService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class ReportServiceImpl implements ReportService {
 
 	private static final TemplateEngine templateEngine = new SpringTemplateEngine();
 
-	public void generateReportFromHtml(WorkoutOutputDTO workout, OutputStream outputStream) {
+	public void generateReportFromHtml(WorkoutDTO workout, OutputStream outputStream) {
 
 		final String TEMPLATE_LOCATION = "report/workout_report_template.html";
 

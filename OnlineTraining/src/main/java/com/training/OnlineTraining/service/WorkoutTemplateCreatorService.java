@@ -1,11 +1,11 @@
 package com.training.OnlineTraining.service;
 
 import com.training.OnlineTraining.dto.WorkoutTemplateDTO;
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
 
 
 public interface WorkoutTemplateCreatorService {
 
-	WorkoutInputDTO createWorkoutInputDTO(WorkoutTemplateDTO workoutTemplateDTO);
+	WorkoutDTO createWorkoutInputDTO(WorkoutTemplateDTO workoutTemplateDTO);
 
 }

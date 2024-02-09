@@ -1,8 +1,8 @@
 package com.training.OnlineTraining.controller;
 
 
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
-import com.training.OnlineTraining.dto.input.WorkoutSessionInputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
+import com.training.OnlineTraining.dto.WorkoutSessionDTO;
 import com.training.OnlineTraining.service.ExerciseService;
 import com.training.OnlineTraining.service.WorkoutSessionService;
 import org.slf4j.Logger;
@@ -36,9 +36,9 @@ public class WorkoutSessionController {
 
 		logger.info("Displaying create workout session form.");
 
-		var workoutSessionInputDTO = new WorkoutSessionInputDTO(workoutID);
+		var workoutSessionDTO = new WorkoutSessionDTO(workoutID);
 
-		model.addAttribute("workoutSessionInputDTO", workoutSessionInputDTO);
+		model.addAttribute("workoutSessionDTO", workoutSessionDTO);
 		model.addAttribute("listExercises", exerciseService.getAllExercises());
 
 		return "workout-session/createWorkoutSession";
@@ -46,25 +46,25 @@ public class WorkoutSessionController {
 
 	@PostMapping("/create")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'COACH')")
-	public String createWorkout(@ModelAttribute("workoutDTO") WorkoutSessionInputDTO workoutSessionInputDTO) {
+	public String createWorkout(@ModelAttribute("workoutDTO") WorkoutSessionDTO workoutSessionDTO) {
 
-		logger.info("Creating a new workout session. {}", workoutSessionInputDTO);
+		logger.info("Creating a new workout session. {}", workoutSessionDTO);
 
-		workoutSessionService.createWorkoutSession(workoutSessionInputDTO);
+		workoutSessionService.createWorkoutSession(workoutSessionDTO);
 
 
-		return "redirect:/workout/details/" + workoutSessionInputDTO.getWorkoutId();
+		return "redirect:/workout/details/" + workoutSessionDTO.getWorkoutId();
 	}
 
 	@PostMapping("/update/{workoutID}")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'COACH')")
 	public String updateWorkoutAndSessions(
 			@PathVariable UUID workoutID,
-			@ModelAttribute("workout") WorkoutInputDTO workoutInputDTO) {
+			@ModelAttribute("workout") WorkoutDTO workoutDTO) {
 
 		logger.info("Updating workout and sessions for workout ID: {}", workoutID);
 
-		workoutSessionService.updateWorkoutSessions(workoutInputDTO.getWorkoutSessions());
+		workoutSessionService.updateWorkoutSessions(workoutDTO.getWorkoutSessions());
 
 		logger.info("Workout and sessions updated successfully.");
 

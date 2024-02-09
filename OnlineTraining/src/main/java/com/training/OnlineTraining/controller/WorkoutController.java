@@ -1,8 +1,7 @@
 package com.training.OnlineTraining.controller;
 
 import com.training.OnlineTraining.dto.WorkoutTemplateDTO;
-import com.training.OnlineTraining.dto.input.WorkoutInputDTO;
-import com.training.OnlineTraining.dto.output.WorkoutOutputDTO;
+import com.training.OnlineTraining.dto.WorkoutDTO;
 import com.training.OnlineTraining.model.enums.WorkoutStatus;
 import com.training.OnlineTraining.service.ExerciseService;
 import com.training.OnlineTraining.service.WorkoutService;
@@ -37,7 +36,7 @@ public class WorkoutController {
 
 		logger.info("Displaying create workout form.");
 
-		model.addAttribute("workoutInputDTO", new WorkoutInputDTO());
+		model.addAttribute("workoutDTO", new WorkoutDTO());
 
 		return "workout/createWorkout";
 	}
@@ -68,13 +67,13 @@ public class WorkoutController {
 
 	@PostMapping("/create")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'COACH')")
-	public String createWorkout(@ModelAttribute("workoutDTO") WorkoutInputDTO workoutInputDTO, HttpSession session) {
+	public String createWorkout(@ModelAttribute("workoutDTO") WorkoutDTO workoutDTO, HttpSession session) {
 
 		logger.info("Creating a new workout.");
 
 		UUID contractID = (UUID) session.getAttribute("contractID");
 
-		workoutService.createEmptyWorkout(workoutInputDTO, contractID);
+		workoutService.createEmptyWorkout(workoutDTO, contractID);
 
 		return "redirect:/workout";
 	}
@@ -92,7 +91,7 @@ public class WorkoutController {
 			session.setAttribute("contractID", contractID);
 		}
 
-		List<WorkoutOutputDTO> workouts = workoutService.getWorkoutsByContractID(contractID);
+		List<WorkoutDTO> workouts = workoutService.getWorkoutsByContractID(contractID);
 		model.addAttribute("workoutsList", workouts);
 
 		UUID clientId = (UUID) session.getAttribute("clientId");
@@ -138,13 +137,13 @@ public class WorkoutController {
 
 	@PostMapping("/update/{id}")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'COACH', 'CLIENT')")
-	public String updateWorkout(@PathVariable UUID id, @ModelAttribute("workout") WorkoutInputDTO workoutInputDTO, HttpSession session) {
+	public String updateWorkout(@PathVariable UUID id, @ModelAttribute("workout") WorkoutDTO workoutDTO, HttpSession session) {
 
 		logger.info("Updating workout for ID: {}", id);
 
 		UUID contractID = (UUID) session.getAttribute("contractID");
 
-		workoutService.updateWorkout(id, workoutInputDTO, contractID);
+		workoutService.updateWorkout(id, workoutDTO, contractID);
 
 
 		return "redirect:/workout";
