@@ -44,7 +44,6 @@
         <th>Client's Status</th>
         <th>Next Workout</th>
         <th>Details</th>
-        <th>Update</th>
         <th>Delete</th>
     </tr>
     </thead>
@@ -62,10 +61,6 @@
         <td th:text="${workout.nextWorkout}"></td>
         <td>
             <a th:href="@{/workout/details/{id}(id=${workout.id})}" class="become-link">Details</a>
-        </td>
-
-        <td>
-            <a th:href="@{/workout/update/{id}(id=${workout.id})}" class="become-link">Update</a>
         </td>
 
         <td>

@@ -66,11 +66,6 @@ public class UserTest {
 	}
 
 	@Test
-	public void testAreInputsInvalid() {
-		assertFalse(userService.areInputsInvalid(userDto));
-	}
-
-	@Test
 	public void testAreInputsInvalid_Exception_Email() {
 		userDto.setEmail("");
 

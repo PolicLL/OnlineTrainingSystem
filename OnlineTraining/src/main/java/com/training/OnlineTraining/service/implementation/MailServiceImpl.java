@@ -1,6 +1,7 @@
 package com.training.OnlineTraining.service.implementation;
 
 
+import com.training.OnlineTraining.dto.MailDTO;
 import com.training.OnlineTraining.service.MailService;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
@@ -16,24 +17,27 @@ public class MailServiceImpl implements MailService {
 
 	private final JavaMailSender javaMailSender;
 
+	private final String ONLINE_TRAINING_SYSTEM_MAIL = "onlinetrainingsystemteam@gmail.com";
+	// TODO -> Add this email to some configuration file
+
 	@Async("mailThreadPoolTaskExecutor")
 	@Override
-	public void sendEmailAsync(String toEmail, String body, String subject) throws MessagingException {
+	public void sendEmailAfterRegistration(String receiverEmail) throws MessagingException {
 
-		sendEmail(toEmail, body, subject);
-		System.out.println("Sent email asynchronously");
+		MailDTO mailDTO = new MailDTO("Welcome to OnlineTrainingSystem!", "Registration Confirmation", receiverEmail);
+
+		sendEmail(mailDTO);
 	}
 
-	@Override
-	public void sendEmail(String toEmail, String body, String subject) throws MessagingException {
+	private void sendEmail(MailDTO mailDTO) throws MessagingException {
 
 		var mimeMessage = javaMailSender.createMimeMessage();
 		var mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
-		mimeMessageHelper.setFrom("onlinetrainingsystemteam@gmail.com");
-		mimeMessageHelper.setTo(toEmail);
-		mimeMessageHelper.setText(body);
-		mimeMessageHelper.setSubject(subject);
+		mimeMessageHelper.setFrom(ONLINE_TRAINING_SYSTEM_MAIL);
+		mimeMessageHelper.setTo(mailDTO.getReceiverEmail());
+		mimeMessageHelper.setText(mailDTO.getBody());
+		mimeMessageHelper.setSubject(mailDTO.getSubject());
 
 		javaMailSender.send(mimeMessage);
 	}

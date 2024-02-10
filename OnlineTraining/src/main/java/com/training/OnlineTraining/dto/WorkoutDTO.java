@@ -1,6 +1,7 @@
 package com.training.OnlineTraining.dto;
 
 import com.training.OnlineTraining.model.WorkoutSession;
+import com.training.OnlineTraining.model.additional.Duration;
 import com.training.OnlineTraining.model.enums.WorkoutStatus;
 import com.training.OnlineTraining.model.enums.WorkoutType;
 import lombok.*;
@@ -71,6 +72,19 @@ public class WorkoutDTO {
 			workoutSessions.forEach(output::append);
 
 		return output.toString();
+	}
+
+	public Duration getDuration() {
+
+		Duration newDuration = new Duration();
+
+		newDuration.add(warmingUpTimeInSeconds);
+		newDuration.add((numberOfSets - 1) * pauseBetweenSetsInSeconds);
+
+		for (WorkoutSession workoutSession : workoutSessions)
+			newDuration.add(workoutSession.getDuration().getDurationInSeconds() * numberOfSets);
+
+		return newDuration;
 	}
 
 }
