@@ -61,6 +61,10 @@ public class Workout {
 	@Enumerated(EnumType.STRING)
 	private WorkoutType nextWorkout;
 
+	@ManyToOne
+	@JoinColumn(name = "workout_plan_id", referencedColumnName = "id", nullable = false)
+	private WorkoutPlan workoutPlan;
+
 	public Duration getDuration() {
 
 		Duration newDuration = new Duration();
