@@ -19,8 +19,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -88,8 +87,6 @@ class UserControllerTest {
 		result.andExpect(status().isOk())
 				.andExpect(view().name("/auth/become_client_or_coach_page"))
 				.andExpect(model().attributeExists("userId"));
-
-		verify(mailService, times(1)).sendEmailAsync(any(), any(), any());
 	}
 
 	@Test

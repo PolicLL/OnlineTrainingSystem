@@ -10,7 +10,7 @@ import java.util.UUID;
 
 
 @Entity
-@Table(name = "User_table", schema = "public")
+@Table(name = "user_table", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

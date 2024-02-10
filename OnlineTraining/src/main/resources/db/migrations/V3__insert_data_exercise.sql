@@ -1,5 +1,5 @@
 -- Inserting exercises with predefined UUIDs
-INSERT INTO Exercise (id, name, description, exercise_equipment, difficulty_level, workout_type) VALUES
+INSERT INTO exercise (id, name, description, exercise_equipment, difficulty_level, workout_type) VALUES
 ('11111111-1111-1111-1111-111111111111', 'Bench Press', 'Lay flat on a bench and push a weighted barbell upwards.', 'Barbell', 'Intermediate', 'PUSH'),
 ('22222222-2222-2222-2222-222222222222', 'Squats', 'Stand with a barbell on your shoulders and squat down and up.', 'Barbell', 'Intermediate', 'LEGS'),
 ('33333333-3333-3333-3333-333333333333', 'Deadlifts', 'Lift a weighted barbell from the ground to hip level.', 'Barbell', 'Advanced', 'LEGS'),

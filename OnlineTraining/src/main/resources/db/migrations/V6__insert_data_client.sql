@@ -1,4 +1,4 @@
-INSERT INTO Client (id, user_id, medical_condition, injuries)
+INSERT INTO client (id, user_id, medical_condition, injuries)
 VALUES
 ('f2b7317c-6f55-4156-99f3-868f54f9af55', '0b2ae5a0-3322-4a75-ba4b-f55f5b23f818', 'Asthma', 'Knee surgery in the past'),
 ('a84f8a15-1e09-4de5-8d6b-10a5d2e023b1', '1a6e3a4f-79d9-4f92-b7b5-c1c5b0f98a55', 'High Blood Pressure', 'None'),
