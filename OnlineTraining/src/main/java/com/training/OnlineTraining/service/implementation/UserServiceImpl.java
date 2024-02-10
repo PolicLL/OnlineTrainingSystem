@@ -4,9 +4,10 @@ import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.mapper.UserMapper;
 import com.training.OnlineTraining.model.User;
 import com.training.OnlineTraining.repository.UserRepository;
+import com.training.OnlineTraining.service.MailService;
 import com.training.OnlineTraining.service.UserService;
-import com.training.OnlineTraining.util.PasswordUtils;
 import com.training.OnlineTraining.util.ValidationUtils;
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,30 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
+	private final MailService mailService;
 
 	@Override
-	public boolean areInputsInvalid(UserDTO request) {
+	public User registerUser(UserDTO request) {
+
+		checkIfUserCanBeRegistered(request);
+
+		var user = saveUserToDatabase(request);
+
+		sendWelcomeMail(user);
+
+		return user;
+	}
+
+	private void checkIfUserCanBeRegistered(UserDTO request) {
+
+		if (areInputsInvalid(request))
+			throw new RuntimeException("Invalid user input");
+
+		if (isEmailAlreadyUsed(request))
+			throw new RuntimeException("Duplicate email");
+	}
+
+	private boolean areInputsInvalid(UserDTO request) {
 
 		return ValidationUtils.isStringNullOrEmpty(request.getFirstName()) ||
 				ValidationUtils.isStringNullOrEmpty(request.getLastName()) ||
@@ -34,34 +56,23 @@ public class UserServiceImpl implements UserService {
 				ValidationUtils.isStringNullOrEmpty(request.getPassword());
 	}
 
-	@Override
-	public User registerUser(UserDTO request) {
-
-		if (areInputsInvalid(request)) {
-			throw new RuntimeException("Invalid user input");
-		}
-
-		if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-			throw new RuntimeException("Duplicate email");
-		}
-
+	private User saveUserToDatabase(UserDTO request){
 		var user = UserMapper.mapDtoToEntity(request);
-
 		return userRepository.save(user);
 	}
 
-	@Override
-	public User authenticate(String email, String enteredPassword) {
+	private boolean isEmailAlreadyUsed(UserDTO request) {
 
-		return userRepository.findByEmail(email)
-				.map(user -> {
-					if (PasswordUtils.verifyPassword(enteredPassword, user.getPassword())) {
-						return user;
-					} else {
-						throw new RuntimeException("Wrong password");
-					}
-				})
-				.orElseThrow(() -> new RuntimeException("Authentication failed"));
+		return userRepository.findByEmail(request.getEmail()).isPresent();
+	}
+
+	private void sendWelcomeMail(User user) {
+
+		try {
+			mailService.sendEmailAfterRegistration(user.getEmail());
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public int countUsers() {

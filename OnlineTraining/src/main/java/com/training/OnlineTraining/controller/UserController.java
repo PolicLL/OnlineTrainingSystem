@@ -1,10 +1,10 @@
 package com.training.OnlineTraining.controller;
 
 import com.training.OnlineTraining.dto.UserDTO;
+import com.training.OnlineTraining.exceptions.PasswordMismatchException;
 import com.training.OnlineTraining.model.User;
 import com.training.OnlineTraining.service.MailService;
 import com.training.OnlineTraining.service.UserService;
-import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -29,7 +29,6 @@ public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-
 	@GetMapping("/register")
 	public String getRegisterPage(Model model) {
 
@@ -39,13 +38,38 @@ public class UserController {
 		return "registration/register_page";
 	}
 
+	@PostMapping("/register")
+	public String register(@ModelAttribute UserDTO request, @RequestParam String confirmPassword, Model model) {
+
+		try {
+			if (arePasswordsDifferent(request, confirmPassword)) {
+				throw new PasswordMismatchException();
+			}
+
+			User registeredUser = userService.registerUser(request);
+
+			model.addAttribute("userId", registeredUser.getId());
+
+			return "/auth/become_client_or_coach_page";
+
+		} catch (RuntimeException e) {
+			model.addAttribute("error", e.getMessage());
+			model.addAttribute("registerRequest", request);
+			return "registration/register_page";
+		}
+	}
+
+	private boolean arePasswordsDifferent(UserDTO request, String confirmPassword){
+		return !request.getPassword().equals(confirmPassword);
+	}
+
 	@GetMapping("/additions")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
 	public String getBecomeClientOrCoachPage(Model model, HttpSession session) {
 
 		UUID userId = (UUID) session.getAttribute("userId");
-
 		model.addAttribute("userId", userId);
+
 		return "auth/become_client_or_coach_page";
 	}
 
@@ -57,31 +81,6 @@ public class UserController {
 		return "auth/login_page";
 	}
 
-
-	@PostMapping("/register")
-	public String register(@ModelAttribute UserDTO request, @RequestParam String confirmPassword, Model model) {
-
-		try {
-			if (!request.getPassword().equals(confirmPassword)) {
-				throw new RuntimeException("Passwords do not match");
-			}
-
-			User registeredUser = userService.registerUser(request);
-			mailService.sendEmailAsync(
-					registeredUser.getEmail(),
-					"Welcome to OnlineTrainingSystem!",
-					" Registration Confirmation"
-			);
-
-			model.addAttribute("userId", registeredUser.getId());
-			return "/auth/become_client_or_coach_page";
-
-		} catch (RuntimeException | MessagingException e) {
-			model.addAttribute("error", e.getMessage());
-			model.addAttribute("registerRequest", request);
-			return "registration/register_page";
-		}
-	}
 
 	@GetMapping("/logout")
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'COACH', 'CLIENT', 'USER')")
