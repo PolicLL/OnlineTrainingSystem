@@ -49,9 +49,17 @@ CREATE TABLE measurement (
     leg_circumference NUMERIC(6, 2) NOT NULL
 );
 
-CREATE TABLE workout (
+CREATE TABLE workout_plan (
     id UUID PRIMARY KEY,
     contract_id UUID REFERENCES contract(id) ON DELETE SET NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    number_of_workouts INTEGER NOT NULL
+);
+
+CREATE TABLE workout (
+    id UUID PRIMARY KEY,
+    workout_plan_id  REFERENCES workout_plan(id) ON DELETE SET NULL,
     date_of_workout DATE,
     number_of_exercises INTEGER NOT NULL,
     warming_up_time_in_seconds INTEGER NOT NULL,
@@ -83,13 +91,4 @@ CREATE TABLE workout_session (
     FOREIGN KEY (exercise_id)
     REFERENCES exercise(id)
     ON DELETE SET NULL
-);
-
-CREATE TABLE workout_plan (
-    id UUID PRIMARY KEY,
-    workout_id UUID,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    number_of_workouts INTEGER NOT NULL,
-    FOREIGN KEY (workout_id) REFERENCES workout(id)
 );
