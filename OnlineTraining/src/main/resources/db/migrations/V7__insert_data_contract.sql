@@ -1,5 +1,5 @@
 -- Inserting contracts for clients with respective coaches
-INSERT INTO Contract (id, coach_id, client_id, start_date, end_date, monthly_price)
+INSERT INTO contract (id, coach_id, client_id, start_date, end_date, monthly_price)
 VALUES
 ('e75833d3-af66-4c11-b787-3d8414e3c331', 'c5f8d1a0-17e9-48a7-910c-ec4c1f7a11e3', 'f2b7317c-6f55-4156-99f3-868f54f9af55', '2023-01-01', '2024-02-11', 1200.00),
 ('f24a456e-3984-4c89-b857-95a54ebaa73e', 'f831f8e9-4e48-4e1b-a4bf-759ab67826d9', 'a84f8a15-1e09-4de5-8d6b-10a5d2e023b1', '2023-01-01', '2023-12-31', 2500.00),

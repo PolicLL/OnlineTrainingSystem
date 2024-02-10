@@ -1,4 +1,4 @@
-INSERT INTO Measurement (id,contract_id, measurement_date, body_weight, body_fat, waist_circumference, chest_circumference, arm_circumference, leg_circumference)
+INSERT INTO measurement (id,contract_id, measurement_date, body_weight, body_fat, waist_circumference, chest_circumference, arm_circumference, leg_circumference)
 VALUES
 ('389881b2-5e6e-4f36-b647-ee565c5cbb8a','e75833d3-af66-4c11-b787-3d8414e3c331', '2024-01-01', 40.5, 15.5, 81.2, 95.5, 32.1, 42.8),
 ('4c042db8-b245-4e13-b17f-46a44e87e3e7','e75833d3-af66-4c11-b787-3d8414e3c331', '2024-01-03', 45.5, 15.9, 82.2, 96.5, 35.1, 43.8),

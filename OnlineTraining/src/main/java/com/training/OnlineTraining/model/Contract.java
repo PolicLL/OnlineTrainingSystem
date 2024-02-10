@@ -11,8 +11,8 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table
 @Getter
+@Table(name = "contract")
 public class Contract {
 
 	@Id

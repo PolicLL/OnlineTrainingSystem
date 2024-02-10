@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public interface AdminService {
 
+	List<UserDTO> getUsers(String roleFilter);
 	List<UserDTO> getAllUsers();
 
 	List<UserDTO> filterUsersByRole(String role);

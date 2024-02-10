@@ -1,5 +1,5 @@
 -- Inserting workout details for contracts
-INSERT INTO Workout (id, contract_id, date_of_workout, number_of_exercises, warming_up_time_in_seconds, number_of_sets, ordinal_number_of_workout, pause_between_sets_in_seconds, self_rating, workout_status, next_workout)
+INSERT INTO workout (id, contract_id, date_of_workout, number_of_exercises, warming_up_time_in_seconds, number_of_sets, ordinal_number_of_workout, pause_between_sets_in_seconds, self_rating, workout_status, next_workout)
 VALUES
 ('5d023fe0-f953-46b1-8e3d-9183aae9d4a4', 'e75833d3-af66-4c11-b787-3d8414e3c331', '2023-01-05', 10, 300, 4, 5, 60, 4, 'WAITING', 'PULL'),
 ('b899b5fe-2a26-49e0-8320-d5de5219c2c9', 'f24a456e-3984-4c89-b857-95a54ebaa73e', '2023-01-08', 8, 240, 3, 4, 45, 5, 'SUCCESSFUL_WORKOUT', 'PULL'),

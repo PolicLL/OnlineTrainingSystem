@@ -5,7 +5,6 @@ import com.training.OnlineTraining.dto.UserDTO;
 import com.training.OnlineTraining.model.enums.Role;
 import com.training.OnlineTraining.service.AdminService;
 import com.training.OnlineTraining.service.WorkoutService;
-import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,8 +36,7 @@ public class AdminController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String getAllUsers(@RequestParam(name = "roleFilter", required = false) String roleFilter, Model model) {
 
-		List<UserDTO> users = StringUtils.isEmpty(roleFilter) ? adminService.getAllUsers() :
-				adminService.filterUsersByRole(String.valueOf(Role.valueOf(roleFilter)));
+		List<UserDTO> users = adminService.getUsers(roleFilter);
 
 		model.addAttribute("users", users);
 		model.addAttribute("availableRoles", Role.values());
@@ -57,8 +55,7 @@ public class AdminController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String getUpdateUserPage(@PathVariable UUID userId, Model model) {
 
-		var user = adminService.getUserById(userId);
-		model.addAttribute("user", user);
+		model.addAttribute("user", adminService.getUserById(userId));
 		return "admin/update_user";
 	}
 
@@ -74,8 +71,7 @@ public class AdminController {
 	@GetMapping("/contracts")
 	public String getAllContracts(Model model, HttpSession session) {
 
-		List<ContractDTO> contracts = adminService.getAllContracts();
-		model.addAttribute("contracts", contracts);
+		model.addAttribute("contracts", adminService.getAllContracts());
 		session.removeAttribute("contractID");
 		return "admin/contracts_page";
 	}

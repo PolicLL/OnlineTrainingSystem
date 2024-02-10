@@ -6,10 +6,12 @@ import com.training.OnlineTraining.mapper.ContractMapper;
 import com.training.OnlineTraining.mapper.UserAdminMapper;
 import com.training.OnlineTraining.mapper.UserMapper;
 import com.training.OnlineTraining.model.User;
+import com.training.OnlineTraining.model.enums.Role;
 import com.training.OnlineTraining.repository.ContractRepository;
 import com.training.OnlineTraining.repository.UserRepository;
 import com.training.OnlineTraining.service.AdminService;
 import com.training.OnlineTraining.specification.UserSpecifications;
+import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -30,6 +32,12 @@ public class AdminServiceImpl implements AdminService {
 	private final UserAdminMapper userAdminMapper;
 	private final ContractMapper contractMapper;
 	private final ContractRepository contractRepository;
+
+	@Override
+	public List<UserDTO> getUsers(String roleFilter){
+		return StringUtils.isEmpty(roleFilter) ? getAllUsers() :
+				filterUsersByRole(String.valueOf(Role.valueOf(roleFilter)));
+	}
 
 	@Override
 	public List<UserDTO> getAllUsers() {

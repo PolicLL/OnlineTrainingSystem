@@ -1,4 +1,4 @@
-INSERT INTO Coach (id, user_id, years_of_experience, education, monthly_price)
+INSERT INTO coach (id, user_id, years_of_experience, education, monthly_price)
 VALUES
 ('c5f8d1a0-17e9-48a7-910c-ec4c1f7a11e3', '7d3e4c58-2c5f-4fe1-9a08-1b5b6c7d8e9f', 5, 'CERTIFIED_PERSONAL_TRAINER', 1200.00),
 ('f831f8e9-4e48-4e1b-a4bf-759ab67826d9', '8b0a1f22-685f-4a63-8c47-20c2a74392f1', 8, 'CERTIFIED_PERSONAL_TRAINER', 2500.00),
